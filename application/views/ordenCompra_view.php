@@ -50,7 +50,7 @@
                         $('[name="input_FechaEmisionOC"]').val(data.FechaEmisionOC);
                         $('[name="input_FechaPagoOC"]').val(data.FechaPagoOC);
                         $('[name="input_RucOC"]').val(data.RucOC);
-                        $('[name="input_ProveedorOC"]').val(data.NombreProveedor);
+                        $('[name="input_ProveedorOC"]').val(data.ProveedorOC);
                         $('[name="input_ConceptoOC"]').val(data.ConceptoOC);
                         $('[name="input_IdMonedaOC"]').val(data.IdMonedaOC);                        
                         $('[name="input_MontoOC"]').val(data.MontoOC);

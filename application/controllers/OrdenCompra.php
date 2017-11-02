@@ -15,7 +15,7 @@ class OrdenCompra extends CI_Controller
         $this->data['FechaEmisionOC'] = date('Y-m-d', strtotime($this->input->post('input_FechaEmisionOC')));
         $this->data['FechaPagoOC'] = date('Y-m-d', strtotime($this->input->post('input_FechaPagoOC')));
         $this->data['RucOC'] = $this->input->post('input_RucOC');
-        $this->data['NombreProveedor'] = $this->input->post('input_ProveedorOC');
+        $this->data['ProveedorOC'] = $this->input->post('input_ProveedorOC');
         $this->data['ConceptoOC'] = $this->input->post('input_ConceptoOC');
         $this->data['IdMonedaOC'] = $this->input->post('input_IdMonedaOC');
         $this->data['MontoOC'] = $this->input->post('input_MontoOC');
