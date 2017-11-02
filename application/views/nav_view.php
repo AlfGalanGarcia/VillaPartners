@@ -10,6 +10,7 @@
                       <li><button class="btn btn-default" onclick="window.location='<?php echo site_url('PlanPago/index/');?>'" style="width: 100%; text-align: left;"><i class="fa fa-list">&nbsp;&nbsp;Elaborar plan de pago</i></button></li>
                       <li><button class="btn btn-default" onclick="window.location='<?php echo site_url('ValeProvisional/index/');?>'" style="width: 100%; text-align: left;"><i class="fa fa-money">&nbsp;&nbsp;Vale provisional</i></button></li>
                       <li><button class="btn btn-default" onclick="window.location='<?php echo site_url('archivoPagos/index/');?>'" style="width: 100%; text-align: left;"><i class="fa fa-file">&nbsp;&nbsp;Archivo de pagos</i></button></li>
+                      <li><button class="btn btn-default" onclick="window.location='<?php echo site_url('CajaChica/index/');?>'" style="width: 100%; text-align: left;"><i class="fa fa-usd" aria-hidden="true">&nbsp;&nbsp;Caja chica</i></button></li>
                     </ul>
                   </div>
                 </li>

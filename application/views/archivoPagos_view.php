@@ -175,7 +175,7 @@
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('Existe un archivo en estado registrado');
+                alert('Existe un archivo en estado vigente');
                 $('#btnSave').text('Grabar');
                 $('#btnSave').attr('disabled',false);
      
@@ -252,7 +252,7 @@
                        {
                         ?>
                         <button id="editarArchivoPagos" class="btn btn-info btn-xs" onclick="editar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Modificar"><i class="glyphicon glyphicon-pencil"></i></button>
-                        <button id="editarArchivoPagos" class="btn btn-success btn-xs" onclick="preaprobar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Modificar"><i class="fa fa-check-square-o"></i></button>
+                        <button id="editarArchivoPagos" class="btn btn-success btn-xs" onclick="preaprobar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Preaprobar"><i class="fa fa-check-square-o"></i></button>
                       <?php
                     }
                 ?>
@@ -348,33 +348,4 @@
         </div>
     </div>
 </div>
-
-
-<script type="text/javascript">
-   $.fn.datepicker.dates['en'] = {
-    days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-    daysShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-    daysMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-    months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-    monthsShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-    today: "Hoy",
-    clear: "Limpiar",
-    format: "dd-mm-yyyy",
-    titleFormat: "MM yyyy",
-    weekStart: 1
-    };
-    $(function() {
-      $('input.datepicker').datepicker({
-        autoclose: true,
-        format: 'dd-mm-yyyy',
-        todayHighlight: true,
-        orientation: "top auto",
-        todayBtn: true,        
-        defaultViewDate: "today",
-        keyboardNavigation: true
-        
-      });
-      
-
-    });
-</script>
+<script src="<?php echo base_url('assests/bootstrap-datepicker/js/datepicker.js')?>"></script>
