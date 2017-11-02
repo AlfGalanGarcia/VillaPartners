@@ -46,6 +46,7 @@ class OrdenCompra_model extends CI_Model {
         $this->db->from($this->tablaOrdenCompra);
         $this->db->where('ordencompra.NroOC',$oc);
         $this->db->join('moneda', 'ordencompra.IdMonedaOC = moneda.IdMoneda');
+        $this->db->join('proveedor', 'ordencompra.ProveedorOC = proveedor.IdProveedor');
         $query = $this->db->get();
  
         return $query->row();

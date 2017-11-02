@@ -27,7 +27,8 @@
         type: "GET",
         dataType: "JSON",
         success: function(data)
-            {            
+            {         
+              var montoIGV = data.MontoOC*0.18;
                 if (!data)
                     {
                         alert("Orden de compra no encontrada");
@@ -38,26 +39,25 @@
                         tablaOC.row.add( [
                                         '<button class="btn btn-danger btn-xs" onclick="eliminar_OC('+data.NroOC+')" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>',
                                         data.NroOC,
-                                        data.ProveedorOC,
+                                        data.NombreProveedor,
                                         data.FechaPagoOC,
-                                        data.MontoOC,
-                                        data.MontoIGVOC,
-                                        data.MontoTotalOC,
+                                        data.MontoOC+" "+data.AbreviaturaMoneda,
+                                        montoIGV,
+                                        parseFloat(data.MontoOC)+parseFloat(montoIGV)+" "+data.AbreviaturaMoneda,
                                      ] ).draw();      
 
                         $('[name="input_NroOC"]').val(data.NroOC);
                         $('[name="input_FechaEmisionOC"]').val(data.FechaEmisionOC);
                         $('[name="input_FechaPagoOC"]').val(data.FechaPagoOC);
                         $('[name="input_RucOC"]').val(data.RucOC);
-                        $('[name="input_ProveedorOC"]').val(data.ProveedorOC);
+                        $('[name="input_ProveedorOC"]').val(data.NombreProveedor);
                         $('[name="input_ConceptoOC"]').val(data.ConceptoOC);
                         $('[name="input_IdMonedaOC"]').val(data.IdMonedaOC);                        
                         $('[name="input_MontoOC"]').val(data.MontoOC);
                         $('[name="input_MontoIGVOC"]').val(data.MontoIGVOC);
                         $('[name="input_MontoTotalOC"]').val(data.MontoTotalOC);
                         $('[name="input_IdEstado"]').val(data.IdEstado);
-                        $('[name="input_IdArchivoPagos"]').val(data.IdArchivoPagos);                                                
-                        
+                        $('[name="input_IdArchivoPagos"]').val(data.IdArchivoPagos);            
                     }
             },
             error: function (jqXHR, textStatus, errorThrown)
