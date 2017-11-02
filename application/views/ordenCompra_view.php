@@ -28,7 +28,7 @@
         dataType: "JSON",
         success: function(data)
             {         
-              var montoIGV = data.MontoOC*0.18;
+              var montoIGV = (data.MontoOC*0.18).toFixed(2);
                 if (!data)
                     {
                         alert("Orden de compra no encontrada");
