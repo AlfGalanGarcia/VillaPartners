@@ -46,4 +46,10 @@ class ModeloPrincipal_model extends CI_Model
         $query = $this->db->query('SELECT IdIgv, valor from igv');
         return $query->result();
     } 
+
+    public function get_montoCajaChica()
+    {
+        $query = $this->db->query('SELECT MontoCC from cajachica');
+        return $query->result();
+    } 
 }

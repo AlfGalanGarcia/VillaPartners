@@ -72,50 +72,58 @@
     });
     }
 
- function save()
+ function save(Monto, MontoCC)
     {
-        $('#btnSave').text('Guardando...');
-        $('#btnSave').attr('disabled',true); 
-
-        var url;
-     
-        if(save_method == 'registrar_documento') {
-            url = "<?php echo site_url('index.php/CajaChica/registrar_documento')?>";
-        } else {
-            url = "<?php echo site_url('index.php/CajaChica/ajax_update')?>";
+        if (Monto > MontoCC) 
+        {
+            alert('No se puede crear el documento, el saldo en la caja chica es: '+MontoCC);
         }
-     
+        else
+        {
+            $('#btnSave').text('Guardando...');
+            $('#btnSave').attr('disabled',true); 
 
-        $.ajax({
-            url : url,
-            type: "POST",
-            data: $('#formulario_documento').serialize(),
-            dataType: "JSON",
-            success: function(data)
-            {
-     
-                if(data.status) 
-                {
-                    $('#modal_documento').modal('hide');               
-                    location.reload();
-                }
-                else
-                {
-                    alert(data);
-                }
-                $('#btnSave').text('Grabar'); 
-                $('#btnSave').attr('disabled',false);
-     
-     
-            },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
-                alert('Existe un archivo en estado vigente');
-                $('#btnSave').text('Grabar');
-                $('#btnSave').attr('disabled',false);
-     
+            var url;
+         
+            if(save_method == 'registrar_documento') {
+                url = "<?php echo site_url('index.php/CajaChica/registrar_documento')?>";
+            } else {
+                url = "<?php echo site_url('index.php/CajaChica/ajax_update')?>";
             }
-        });
+         
+
+            $.ajax({
+                url : url,
+                type: "POST",
+                data: $('#formulario_documento').serialize(),
+                dataType: "JSON",
+                success: function(data)
+                {
+         
+                    if(data.status) 
+                    {
+                        $('#modal_documento').modal('hide');               
+                        location.reload();
+                    }
+                    else
+                    {
+                        alert(data);
+                    }
+                    $('#btnSave').text('Grabar'); 
+                    $('#btnSave').attr('disabled',false);
+         
+         
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert('Existe un archivo en estado vigente');
+                    $('#btnSave').text('Grabar');
+                    $('#btnSave').attr('disabled',false);
+         
+                }
+            });
+        }
+        
     }
 
 
@@ -179,14 +187,17 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>        
-            <div class="col-md-6 pull-left">
-                <h4 class="modal-title">Registrar documento</h4>                
+            <div class="col-md-12 pull-left">
+                <h4 class="modal-title">Registrar documento<br><b></h4>
+                    <h4 style="text-align: right;"> Saldo en caja chica: <?php echo $montoCajaChica[0]->MontoCC;?>&nbsp; S/</b></h4>                
             </div>
         </div>      
       <div class="modal-body form">
         <form action="#" id="formulario_documento" class="form-horizontal">          
           <div class="form-body">
             <div class="col-md-6 form-group pull-left">
+                <input type="hidden" value="1" name="input_IdCajaChica"/>
+                <input type="hidden" value="<?php echo $montoCajaChica[0]->MontoCC;?>" name="input_MontoCC"/>
                 <label class="control-label">Número de documento</label>
                 <input name="input_IdDetalleCC" class="form-control" type="text">
                 
@@ -233,7 +244,7 @@
                      
             <div class="col-md-12 form-group pull-right"> 
                 <center>
-                    <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Grabar</button>
+                    <button type="button" id="btnSave" onclick="save(document.getElementsByName('input_Monto')[0].value, document.getElementsByName('input_MontoCC')[0].value)" class="btn btn-primary">Grabar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </center>                 
             </div>
