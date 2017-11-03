@@ -11,10 +11,16 @@ class CajaChica extends CI_Controller
         parent::__construct();
         $this->load->model('ModeloPrincipal_model');
         $this->load->model('CajaChica_model');
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('', '');
+        $this->form_validation->set_rules('input_IdDetalleCC', 'Número de documento', 'required|is_natural');
+        $this->form_validation->set_rules('input_FechaEmision', 'Fecha de emisión', 'required');
+        $this->form_validation->set_rules('input_DescripcionCC', 'Descripción', 'required');
+        $this->form_validation->set_rules('input_Monto', 'Monto', 'required|decimal');
 
         //Campos formulario
+        $this->data['IdDetalleCC'] = $this->input->post('input_IdDetalleCC');        
         $this->data['IdCajaChica'] = $this->input->post('input_IdCajaChica');
-        $this->data['IdDetalleCC'] = $this->input->post('input_IdDetalleCC');
         $this->data['IdProveedor'] = $this->input->post('input_IdProveedor');
         $this->data['FechaEmision'] = date('Y-m-d', strtotime($this->input->post('input_FechaEmision')));
         $this->data['DescripcionCC'] = $this->input->post('input_DescripcionCC');
@@ -23,8 +29,9 @@ class CajaChica extends CI_Controller
         $this->data['IdIgv'] = $this->input->post('input_IdIgv');
         $this->data['Monto'] = $this->input->post('input_Monto')*1.18;
         
-        $this->dataCajaChica['MontoCC'] = $this->input->post('input_MontoCC')-$this->input->post('input_Monto')*1.18;
+        $this->dataRestarMontoCC['MontoCC'] = $this->session->userdata('MontoCC')-$this->input->post('input_Monto')*1.18;
 
+        $this->devolverMonto['MontoCC'] = $this->session->userdata('MontoCC')+$this->input->post('monto');
 
         $this->datosVista['detalleCajaChica']=$this->CajaChica_model->get_all_cajaChica(); 
         $this->datosVista['tipoDoc']=$this->ModeloPrincipal_model->get_tipoDoc();   
@@ -48,22 +55,45 @@ class CajaChica extends CI_Controller
     public function registrar_documento()
     {
     
-       /*if ($this->form_validation->run() == FALSE) 
+       if ($this->form_validation->run() == FALSE) 
        {
             echo json_encode(validation_errors());
        } 
        else 
-       {*/	
+       {
        		$this->CajaChica_model->registrar_documento($this->data);
        		echo json_encode(array("status" => TRUE));	
-       		$this->CajaChica_model->actualizar_cajachica(array('IdCajaChica' => '1'),$this->dataCajaChica);
+       		$this->CajaChica_model->actualizar_cajachica(array('IdCajaChica' => '1'),$this->dataRestarMontoCC);
             
-       //}  
+       }  
     }
 
-    public function eliminar_documento($id)
+    public function editar_documento($id)
     {
-        $this->CajaChica_model->delete_by_id($id);
+        $data = $this->CajaChica_model->get_by_id($id);
+        $data->FechaEmision = ($data->FechaEmision == '0000-00-00') ? '' : date('d-m-Y', strtotime($data->FechaEmision));
+        echo json_encode($data);
+    }
+
+    public function ajax_update()
+    {
+        if ($this->form_validation->run() == FALSE) 
+        {
+            echo json_encode(validation_errors());
+        } 
+        else 
+        {
+        	//$this->CajaChica_model->actualizar_cajachica(array('IdCajaChica' => '1'),$this->dataRestarMontoCC);
+            $this->CajaChica_model->actualizar_documento(array('IdDetalleCC' => $this->input->post('input_IdDetalleCC')), $this->data);
+            echo json_encode(array("status" => TRUE));
+        }
+
+    }
+
+    public function eliminar_documento()
+    {
+    	$this->CajaChica_model->actualizar_cajachica(array('IdCajaChica' => '1'),$this->devolverMonto);
+        $this->CajaChica_model->delete_by_id($this->input->post('id'));
         echo json_encode(array("status" => TRUE));
     }
 }

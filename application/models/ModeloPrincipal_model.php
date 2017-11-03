@@ -50,6 +50,11 @@ class ModeloPrincipal_model extends CI_Model
     public function get_montoCajaChica()
     {
         $query = $this->db->query('SELECT MontoCC from cajachica');
+        $datos = $query->result()[0];
+        $datosSesion = array(
+                   'MontoCC'  => $datos->MontoCC
+               );
+        $this->session->set_userdata($datosSesion);
         return $query->result();
     } 
 }

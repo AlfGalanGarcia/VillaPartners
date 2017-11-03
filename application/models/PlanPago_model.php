@@ -26,7 +26,7 @@ class PlanPago_model extends CI_Model {
  
     public function get_by_id($id)
     {
-        $this->db->from($this->tablaPlanPago);
+        //$this->db->from($this->tablaPlanPago);
         $this->db->where('planpago.IdPlanPago',$id);
         $this->db->join('ordencompra', 'planpago.NroOC = ordencompra.NroOC');
         $query = $this->db->get();

@@ -27,6 +27,15 @@ class CajaChica_model extends CI_Model {
             return $query->result();        
     }
 
+    public function get_by_id($id)
+    {
+        $this->db->from($this->tablaDetalleCC);
+        $this->db->where('detallecajachica.IdDetalleCC',$id);       
+        $query = $this->db->get();
+ 
+        return $query->row();
+    }
+
     public function registrar_documento($data)
     {
         
@@ -39,6 +48,13 @@ class CajaChica_model extends CI_Model {
         $this->db->update($this->tablaCajaChica, $data, $where);
         return $this->db->affected_rows();
     }
+
+    public function actualizar_documento($where,$data)
+    {
+        $this->db->update($this->tablaDetalleCC, $data, $where);
+        return $this->db->affected_rows();
+    }
+
 
     public function delete_by_id($id)
     {

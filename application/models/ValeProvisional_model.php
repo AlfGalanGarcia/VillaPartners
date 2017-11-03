@@ -13,7 +13,7 @@ class ValeProvisional_model extends CI_Model {
 
     public function get_all_vale_provisional()
     {
-        $this->db->from('valeprovisional');
+        //$this->db->from('valeprovisional');
         $query=$this->db->query('
             SELECT valeprovisional.*, CONCAT(empleado.Nombres," ",empleado.ApePaterno) as nombres, estado.* FROM valeprovisional 
             INNER JOIN empleado ON valeprovisional.IdEmpleado = empleado.IdEmpleado
