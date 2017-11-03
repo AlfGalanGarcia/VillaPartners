@@ -15,7 +15,6 @@ class LoginVilla extends CI_Controller {
 		$this->load->model('PlanPago_model');
 
 		$this->datosVista['local']=$this->ModeloPrincipal_model->get_local('1');
-		$this->datosVista['empleadoLogin']=$this->ModeloPrincipal_model->get_empleadoLogin($this->input->post('user'));
         $this->datosVista['planesPago']=$this->PlanPago_model->get_all_planes_pago(); 
         $this->datosVista['mensaje'] = ''; 
     }

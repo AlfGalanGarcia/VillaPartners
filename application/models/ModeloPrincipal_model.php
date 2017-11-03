@@ -3,13 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 header("Content-type: text/html; charset=utf-8");
 class ModeloPrincipal_model extends CI_Model 
 	{
-		var $tablalocal = 'local';
+		var $tablaEmpleado = 'empleado';
 
-        public function __construct()
-        {
-            parent::__construct();            
-            $this->load->database();
-        }
+    public function __construct()
+    {
+        parent::__construct();            
+        $this->load->database();
+    }
 
     public function get_empleado()
     {
@@ -17,17 +17,33 @@ class ModeloPrincipal_model extends CI_Model
         return $query->result();
     }
 
-    public function get_empleadoLogin($user)
-    {
-        $query = $this->db->query('SELECT IdEmpleado, CONCAT(e.Nombres," ",e.ApePaterno) as nombres, alias from empleado e');
-        $this->db->where('empleado.Alias',$user);
-        return $query->result();
-    }
-
     public function get_local()
     {
         $query = $this->db->query('SELECT Nombre from local');
         return $query->result();
+    }    
+
+    public function get_tipoDoc()
+    {
+        $query = $this->db->query('SELECT IdTipoDoc, DescripcionTipoDoc from tiposdoc');
+        return $query->result();
+    }   
+
+    public function get_proveedor()
+    {
+        $query = $this->db->query('SELECT IdProveedor, NombreProveedor from proveedor');
+        return $query->result();
     }     
-        
+       
+    public function get_moneda()
+    {
+        $query = $this->db->query('SELECT IdMoneda, DescripcionMoneda, AbreviaturaMoneda from moneda');
+        return $query->result();
+    } 
+
+    public function get_IGV()
+    {
+        $query = $this->db->query('SELECT IdIgv, valor from igv');
+        return $query->result();
+    } 
 }

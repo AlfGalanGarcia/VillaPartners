@@ -17,7 +17,15 @@ class LoginVilla_model extends CI_Model
 			$this->db->from('empleado');
 			$this->db->where($condition);
 			$this->db->limit(1);
-			$query = $this->db->get();
+			$query = $this->db->get();			
+			$datos = $query->result()[0];
+			$datosSesion = array(
+                   'empleado'  => $datos->Nombres." ".$datos->ApePaterno,
+                   'alias'     => $datos->Alias,
+                   'logged_in' => TRUE
+               );
+
+			$this->session->set_userdata($datosSesion);
 
 			if ($query->num_rows() == 1) 
 			{

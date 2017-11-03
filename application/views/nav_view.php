@@ -16,7 +16,7 @@
                 </li>
       </ul>
           <ul class="nav navbar-nav navbar-right">
-      <li><i class="fa fa-user-circle"></i>&nbsp;<?php echo $empleadoLogin[0]->nombres;?>&nbsp; <button class="btn btn-danger btn-xs" onclick="window.location='<?php echo site_url('loginVilla/index/');?>'" title="Logout"><i class="fa fa-sign-out" aria-hidden="true"></i></button>&nbsp;</li>      
+      <li><i class="fa fa-user-circle"></i>&nbsp;<?php echo $this->session->userdata('empleado');?>&nbsp; <button class="btn btn-danger btn-xs" onclick="window.location='<?php echo site_url('loginVilla/index/');?>'" title="Logout"><i class="fa fa-sign-out" aria-hidden="true"></i></button>&nbsp;</li>      
     </ul>
   </div>
     </nav>

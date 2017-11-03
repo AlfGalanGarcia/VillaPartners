@@ -21,7 +21,6 @@ class ArchivoPagos extends CI_Controller
         $this->datosVista['archivoPagos']=$this->ArchivoPagos_model->get_all_archivoPagos(); 
         $this->datosVista['ordenCompra']=$this->OrdenCompra_model->get_all_ordenCompra(); 
         $this->datosVista['sumaMontoTotalOC']=$this->OrdenCompra_model->get_all_montosOC(); 
-        $this->datosVista['empleadoLogin']=$this->ModeloPrincipal_model->get_empleado();   
         $this->datosVista['local']=$this->ModeloPrincipal_model->get_local(); 	
     }
 
