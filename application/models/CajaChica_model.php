@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class CajaChica_model extends CI_Model {
  
     var $tablaDetalleCC = 'detallecajachica';
-    var $tablaCajaChica = 'cajachica';
+    //var $tablaCajaChica = 'cajachica';
  
     public function __construct()
     {
@@ -27,6 +27,14 @@ class CajaChica_model extends CI_Model {
             return $query->result();        
     }
 
+    public function get_all_montosCC()
+    {
+        $query=$this->db->query('
+            SELECT SUM(detallecajachica.Monto) AS sumaMontosCC FROM detallecajachica                     
+            WHERE detallecajachica.IdCajaChica = 1');
+        return $query->result();
+    }
+
     public function get_by_id($id)
     {
         $this->db->from($this->tablaDetalleCC);
@@ -43,11 +51,11 @@ class CajaChica_model extends CI_Model {
         return $this->db->insert_id();
     }
 
-    public function actualizar_cajachica($where,$data)
+    /*public function actualizar_cajachica($where,$data)
     {
         $this->db->update($this->tablaCajaChica, $data, $where);
         return $this->db->affected_rows();
-    }
+    }*/
 
     public function actualizar_documento($where,$data)
     {

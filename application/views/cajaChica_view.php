@@ -66,12 +66,11 @@
             $('[name="input_IdCajaChica"]').val(data.IdCajaChica); 
             $('[name="input_IdTipoDoc"]').val(data.IdTipoDoc);                      
             $('[name="input_IdProveedor"]').val(data.IdProveedor);
-            $('[name="input_FechaEmision"]').datepicker('update', data.FechaEmision);
+            $('[name="input_FechaEmision"]').val(data.FechaEmision);
             $('[name="input_DescripcionCC"]').val(data.DescripcionCC);            
             $('[name="input_IdMoneda"]').val(data.IdMoneda);
             $('[name="input_IdIgv"]').val(data.IdIgv);
             $('[name="input_Monto"]').val(data.Monto);
-            $('[name="input_MontoCC"]').val(data.MontoCC);
             
             $('#modal_editarDocumento').modal('show');
             $('.modal-title').text('Editar documento'); 
@@ -83,60 +82,24 @@
     });
     }
 
-
-function actualizar_documento()
+ function save()
     {
-        /*if ((Monto*1.18) > MontoCC) 
-        {
-            alert('No se puede crear el documento, el saldo en la caja chica es: '+MontoCC+", monto del documento: "+(Monto*1.18));
-        }
-        else
-        {*/
-            $('#btnSave').text('Guardando...');
-            $('#btnSave').attr('disabled',true); 
-
-            var url;
-            if(save_method == 'update') {
-                url = "<?php echo site_url('index.php/CajaChica/ajax_update')?>";
+        if(save_method == 'registrar_documento') {
+                var dataArray = $("#formulario_documento").serializeArray(),
+                    dataObj = {};
             }
+            else
+            {
+                var dataArray = $("#formulario_editarDocumento").serializeArray(),
+                    dataObj = {};
+            }
+                $(dataArray).each(function(i, field){
+                  dataObj[field.name] = field.value;
+                });
 
-
-            $.ajax({
-                url : url,
-                type: "POST",
-                data: $('#formulario_editarDocumento').serialize(),
-                dataType: "JSON",
-                success: function(data)
-                {
-         
-                    if(data.status) 
-                    {
-                        $('#modal_editarDocumento').modal('hide');               
-                        location.reload();
-                    }
-                    else
-                    {
-                        alert(data);
-                    }
-                    $('#btnSave').text('Grabar'); 
-                    $('#btnSave').attr('disabled',false);
-         
-         
-                },
-                error: function (jqXHR, textStatus, errorThrown)
-                {
-                    alert('Error en los datos.');
-                    $('#btnSave').text('Grabar');
-                    $('#btnSave').attr('disabled',false);
-         
-                }
-            });
-        //}
+            var Monto = dataObj['input_Monto'];
+            var MontoCC = dataObj['input_MontoCC'];
         
-    }
-
- function save(Monto, MontoCC)
-    {
         if ((Monto*1.18) > MontoCC) 
         {
             alert('No se puede crear el documento, el saldo en la caja chica es: '+MontoCC+".");
@@ -150,20 +113,28 @@ function actualizar_documento()
          
             if(save_method == 'registrar_documento') {
                 url = "<?php echo site_url('index.php/CajaChica/registrar_documento')?>";
+                var formularioGrabar = $('#formulario_documento');
+                var modalGrabar = $('#modal_documento');
+            }
+            else
+            {
+                url = "<?php echo site_url('index.php/CajaChica/ajax_update')?>";
+                var formularioGrabar = $('#formulario_editarDocumento');
+                var modalGrabar = $('#modal_editarDocumento');
             }
          
 
             $.ajax({
                 url : url,
                 type: "POST",
-                data: $('#formulario_documento').serialize(),
+                data: formularioGrabar.serialize(),
                 dataType: "JSON",
                 success: function(data)
                 {
          
                     if(data.status) 
                     {
-                        $('#modal_documento').modal('hide');               
+                        modalGrabar.modal('hide');               
                         location.reload();
                     }
                     else
@@ -211,7 +182,10 @@ function actualizar_documento()
     }
 </script>
 <body>
-    <h3 style="border-bottom: 1px solid rgb(200, 200, 200)"></i>Saldo caja chica: <b><?php echo $this->session->userdata('MontoCC');?></b></h3>
+    <?php $montoCCSession = $this->session->userdata('MontoCC');?>
+    <?php $montoCCTotal = sprintf('%0.3f', ($montoCCSession)-($sumaMontosCC[0]->sumaMontosCC)) ;?>
+    <h3 style="border-bottom: 1px solid rgb(200, 200, 200)"></i>Saldo caja chica: <b><?php echo
+    $montoCCTotal;?></b></h3>
     <section>        
        <table id="tabla_cajaChica" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
@@ -299,14 +273,14 @@ function actualizar_documento()
                 <?PHP echo "<input type='text' value='".$igv[0]->valor."' class='form-control' name='' readonly/>";?>
 
                 <label class="control-label">Monto total</label>
-                <input name="input_Monto" class="form-control" type="text">
-                <input type="hidden" name="input_MontoCC" value="<?php echo htmlspecialchars($montoCajaChica[0]->MontoCC); ?>" />
+                <input name="input_Monto" id="inputEditar_Monto" class="form-control" type="text">
+                <input type="hidden" name="input_MontoCC" id="inputEditar_MontoCC" value="<?php echo htmlspecialchars($montoCCTotal); ?>" />
                 </form>
             </div>                        
                      
             <div class="col-md-12 form-group pull-right"> 
                 <center>
-                    <button type="button" id="btnSave" onclick="save(document.getElementsByName('input_Monto')[0].value, document.getElementsByName('input_MontoCC')[0].value)" class="btn btn-primary">Grabar</button>
+                    <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Grabar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </center>                 
             </div>
@@ -333,7 +307,7 @@ function actualizar_documento()
             <div class="col-md-6 form-group pull-left">
                 <input type="hidden" value="1" name="input_IdCajaChica"/>                
                 <label class="control-label">Número de documento </label>
-                <input name="input_IdDetalleCC" class="form-control" type="text">
+                <input name="input_IdDetalleCC" class="form-control" type="text" readonly>
                 
                 <label class="control-label">Proveedor</label>
                 <select name="input_IdProveedor" class="form-control">
@@ -372,14 +346,14 @@ function actualizar_documento()
                 <?PHP echo "<input type='text' value='".$igv[0]->valor."' class='form-control' name='' readonly/>";?>
 
                 <label class="control-label">Monto total</label>
-                <input name="input_Monto" class="form-control" type="text">
-                <input type="hidden" name="input_MontoCC" value="<?php echo htmlspecialchars($montoCajaChica[0]->MontoCC); ?>" />
+                <input name="input_Monto" id="input_Monto" class="form-control" type="text">
+                <input type="hidden" name="input_MontoCC" id="input_MontoCC" value="<?php echo htmlspecialchars($montoCCTotal); ?>" />
                 </form>
             </div>                        
                      
             <div class="col-md-12 form-group pull-right"> 
                 <center>
-                    <button type="button" id="btnSave" onclick="actualizar_documento()" class="btn btn-primary">Grabar</button>
+                    <button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Grabar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </center>                 
             </div>

@@ -8,8 +8,9 @@ class OrdenCompra extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('OrdenCompraTemporal_model');
         $this->load->model('OrdenCompra_model');
-        $this->datosVista['ordenCompra']=$this->OrdenCompra_model->get_all_ordenCompra(); 
+        
 
         $this->data['NroOC'] = $this->input->post('input_NroOC');
         $this->data['FechaEmisionOC'] = date('Y-m-d', strtotime($this->input->post('input_FechaEmisionOC')));
@@ -26,19 +27,20 @@ class OrdenCompra extends CI_Controller
     }
 
     public function index()
-    {                   
+    {          
+        $this->datosVista['ordenCompra']=$this->OrdenCompraTemporal_model->get_all_ordenCompra();          
         $this->load->view('ordenCompra_view',$this->datosVista);
     }
 
     public function agregar_OC()
     {
-        $this->OrdenCompra_model->agregar_OC($this->data);
+        $this->OrdenCompraTemporal_model->agregar_OC($this->data);
         echo json_encode(array("status" => TRUE));        
     }
 
     public function editar_archivoPagos($id)
     {
-        $data = $this->OrdenCompra_model->get_by_id($id);     
+        $data = $this->OrdenCompraTemporal_model->get_by_id($id);     
         echo json_encode($data);
     }
 
@@ -60,7 +62,7 @@ class OrdenCompra extends CI_Controller
 
     public function eliminar_OC($id)
     {
-        $this->OrdenCompra_model->delete_by_id($id);
+        $this->OrdenCompraTemporal_model->delete_by_id($id);
         echo json_encode(array("status" => TRUE));
     }
 }

@@ -10,7 +10,7 @@ class ArchivoPagos extends CI_Controller
         parent::__construct();
         $this->load->model('ArchivoPagos_model');
         $this->load->model('ModeloPrincipal_model');
-        $this->load->model('OrdenCompra_model');
+        $this->load->model('OrdenCompraTemporal_model');
         $this->load->helper('form');
 
         $this->data['FechaCreacion'] = date('Y-m-d', strtotime($this->input->post('input_FechaCreacion')));
@@ -18,9 +18,10 @@ class ArchivoPagos extends CI_Controller
         $this->data['IdEstado'] = $this->input->post('input_Estado');
         $this->data['IdMoneda'] = $this->input->post('input_IdMoneda');
 
+
         $this->datosVista['archivoPagos']=$this->ArchivoPagos_model->get_all_archivoPagos(); 
-        $this->datosVista['ordenCompra']=$this->OrdenCompra_model->get_all_ordenCompra(); 
-        $this->datosVista['sumaMontoTotalOC']=$this->OrdenCompra_model->get_all_montosOC(); 
+        $this->datosVista['ordenCompra']=$this->OrdenCompraTemporal_model->get_all_ordenCompra(); 
+        $this->datosVista['sumaMontoTotalOC']=$this->OrdenCompraTemporal_model->get_all_montosOC(); 
         $this->datosVista['local']=$this->ModeloPrincipal_model->get_local(); 	
     }
 

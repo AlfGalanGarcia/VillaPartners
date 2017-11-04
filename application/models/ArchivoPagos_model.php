@@ -14,7 +14,7 @@ class ArchivoPagos_model extends CI_Model {
   
     public function get_all_archivoPagos()
     {
-        //$this->db->from($this->tablaArchivoPagos);
+        $this->db->from($this->tablaArchivoPagos);
         $query=$this->db->query('
             SELECT archivoPagos.*, estado.*, moneda.* FROM archivoPagos 
             INNER JOIN estado ON archivoPagos.IdEstado = estado.IdEstado
@@ -44,7 +44,7 @@ class ArchivoPagos_model extends CI_Model {
 
     public function get_by_id($id)
     {
-        $this->db->from($this->tablaArchivoPagos);
+        //$this->db->from($this->tablaArchivoPagos);
         $this->db->where('archivopagos.IdArchivoPagos',$id);
         $this->db->join('estado', 'archivopagos.IdEstado = estado.IdEstado');
         $query = $this->db->get();

@@ -28,13 +28,14 @@
         dataType: "JSON",
         success: function(data)
             {         
-              var montoIGV = (data.MontoOC*0.18).toFixed(2);
+              
                 if (!data)
                     {
                         alert("Orden de compra no encontrada");
                     }
                 else
                     {
+                        var montoIGV = (data.MontoOC*0.18).toFixed(2);
                         alert('Orden de compra '+data.NroOC+' encontrada, se añadirá a la lista');
                         tablaOC.row.add( [
                                         '<button class="btn btn-danger btn-xs" onclick="eliminar_OC('+data.NroOC+')" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>',
@@ -69,7 +70,7 @@
 
     function cerrar()
     {
-        $('#modal_oc').modal('hide');   
+        $('#modal_oc').modal('hide');
     }
 
     function saveOC()
@@ -98,6 +99,13 @@
 
     function eliminar_OC(id)
     {
+      var tablaOC = $('#tabla_oc').DataTable( 
+        { 
+          bAutoWidth:false,
+          dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
+        "<'row'<'col-sm-12'rt>>" +
+        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        } ); 
       if(confirm('¿Estás seguro? Se va a eliminar la orden de compra'))
       {
           $.ajax({
@@ -105,14 +113,15 @@
             type: "POST",
             dataType: "JSON",
             success: function(data)
-            {             
-               window.location.reload();
+            {  
+              var filas = tablaOC.data().length-1
+              tablaOC.row(filas).remove().draw( false )
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
                 alert('Error borrando los datos');
             }
-        });
+        })
       }
     }
 </script>

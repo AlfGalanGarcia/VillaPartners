@@ -27,13 +27,10 @@ class CajaChica extends CI_Controller
         $this->data['IdTipoDoc'] = $this->input->post('input_IdTipoDoc');
         $this->data['IdMoneda'] = $this->input->post('input_IdMoneda');
         $this->data['IdIgv'] = $this->input->post('input_IdIgv');
-        $this->data['Monto'] = $this->input->post('input_Monto')*1.18;
-        
-        $this->dataRestarMontoCC['MontoCC'] = $this->session->userdata('MontoCC')-$this->input->post('input_Monto')*1.18;
-
-        $this->devolverMonto['MontoCC'] = $this->session->userdata('MontoCC')+$this->input->post('monto');
+        $this->data['Monto'] = $this->input->post('input_Monto')*1.18;  
 
         $this->datosVista['detalleCajaChica']=$this->CajaChica_model->get_all_cajaChica(); 
+        $this->datosVista['sumaMontosCC']=$this->CajaChica_model->get_all_montosCC(); 
         $this->datosVista['tipoDoc']=$this->ModeloPrincipal_model->get_tipoDoc();   
         $this->datosVista['montoCajaChica']=$this->ModeloPrincipal_model->get_montoCajaChica();   
         $this->datosVista['proveedor']=$this->ModeloPrincipal_model->get_proveedor();   
@@ -62,9 +59,7 @@ class CajaChica extends CI_Controller
        else 
        {
        		$this->CajaChica_model->registrar_documento($this->data);
-       		echo json_encode(array("status" => TRUE));	
-       		$this->CajaChica_model->actualizar_cajachica(array('IdCajaChica' => '1'),$this->dataRestarMontoCC);
-            
+       		echo json_encode(array("status" => TRUE));	       
        }  
     }
 
@@ -77,22 +72,20 @@ class CajaChica extends CI_Controller
 
     public function ajax_update()
     {
-        if ($this->form_validation->run() == FALSE) 
+        /*if ($this->form_validation->run() == FALSE) 
         {
             echo json_encode(validation_errors());
         } 
         else 
-        {
-        	//$this->CajaChica_model->actualizar_cajachica(array('IdCajaChica' => '1'),$this->dataRestarMontoCC);
+        {      */  	
             $this->CajaChica_model->actualizar_documento(array('IdDetalleCC' => $this->input->post('input_IdDetalleCC')), $this->data);
             echo json_encode(array("status" => TRUE));
-        }
+        //}
 
     }
 
     public function eliminar_documento()
-    {
-    	$this->CajaChica_model->actualizar_cajachica(array('IdCajaChica' => '1'),$this->devolverMonto);
+    {    	
         $this->CajaChica_model->delete_by_id($this->input->post('id'));
         echo json_encode(array("status" => TRUE));
     }

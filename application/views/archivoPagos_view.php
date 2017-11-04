@@ -100,7 +100,7 @@
 
       save_method = 'update';
       $.ajax({
-        url : "<?php echo site_url('index.php/OrdenCompra/editar_archivoPagos')?>/" + id,
+        url : "<?php echo site_url('index.php/ArchivoPagos/editar_archivoPagos')?>/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
@@ -245,14 +245,27 @@
                     {
                         ?>
                         <button id="editarArchivoPagos" class="btn btn-info btn-xs" onclick="editar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Modificar" disabled><i class="glyphicon glyphicon-pencil"></i></button>
-                        <button id="editarArchivoPagos" class="btn btn-primary btn-xs" onclick="mostrar_archivoPagosMini(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Mostrar OC"><i class="fa fa-search"></i></button>
+                        <button id="mostrarArchivoPagosMini" class="btn btn-primary btn-xs" onclick="mostrar_archivoPagosMini(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Mostrar OC"><i class="fa fa-search"></i></button>
                         <?php
                     }
                     else
                        {
                         ?>
                         <button id="editarArchivoPagos" class="btn btn-info btn-xs" onclick="editar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Modificar"><i class="glyphicon glyphicon-pencil"></i></button>
-                        <button id="editarArchivoPagos" class="btn btn-success btn-xs" onclick="preaprobar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Preaprobar"><i class="fa fa-check-square-o"></i></button>
+                            <?php
+                            if ($sumaMontoTotalOC[0]->sumaMontos == 0.000) {
+                                ?>
+                                <button id="editarArchivoPagos" class="btn btn-success btn-xs" onclick="preaprobar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Preaprobar" disabled><i class="fa fa-check-square-o"></i></button>    
+                                <?php
+                            }
+                            else
+                            {
+                                ?>
+                                <button id="editarArchivoPagos" class="btn btn-success btn-xs" onclick="preaprobar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Preaprobar"><i class="fa fa-check-square-o"></i></button>    
+                                <?php
+                            }
+                            ?>
+
                       <?php
                     }
                 ?>

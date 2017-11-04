@@ -36,7 +36,7 @@ class PlanPago_model extends CI_Model {
 
     public function get_oc($oc)
     {
-        $this->db->from($this->tablaPlanPago);
+        //$this->db->from($this->tablaPlanPago);
         $this->db->where('ordencompra.NroOC',$oc);
         $query=$this->db->query('
             SELECT ordencompra.* FROM ordencompra 
