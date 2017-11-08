@@ -8,9 +8,16 @@ class AbrirCaja extends CI_Controller
     {
     	parent::__construct();
     	$this->load->model('ModeloPrincipal_model');
+    	$this->load->helper('form');
     	$this->load->model('Caja_model');
+        $this->load->library('form_validation');
         $this->datosVista['local']=$this->ModeloPrincipal_model->get_local('1');       
-        $this->datosVista['caja']=$this->Caja_model->get_caja();       
+        $this->datosVista['caja']=$this->Caja_model->get_caja();    
+        $this->datosVista['mensaje'] = '';    
+
+        $this->form_validation->set_error_delimiters('', '');
+        $this->form_validation->set_rules('montoSoles', 'Monto en soles', 'required|decimal');
+        $this->form_validation->set_rules('montoDolares', 'Monto en dólares', 'required|decimal');
     }
 
     public function index()
@@ -19,14 +26,38 @@ class AbrirCaja extends CI_Controller
  
         $this->load->view('header_view');                      
         $this->load->view('nav_view',$this->datosVista);                      
-        $this->load->view('abrirCaja_view',$this->datosVista);
+        $this->load->view('abrirCaja_view');                              
+    }
+
+    public function cuadrar_caja()
+    {
+        $this->load->helper('url');
+        $this->load->view('header_view');                      
+        $this->load->view('nav_view',$this->datosVista);                              
+        $this->load->view('cuadrarCaja_view',$this->datosVista);
+    }    
+
+	public function abrir_caja()
+    {
+		$this->data['IdEstadoCaja'] = '4';
+        $this->data['montoSoles'] = $this->input->post('montoSoles');
+        $this->data['montoDolares'] = $this->input->post('montoDolares');
+        $this->data['IdEmpleadoCaja'] = $this->input->post('userId');
+
+        if ($this->form_validation->run() == FALSE) 
+        {
+            echo json_encode(validation_errors());
+        } 
+        else 
+        {
+            $this->Caja_model->abrir_caja(array('IdCaja' => '1'), $this->data);
+            echo json_encode(array("status" => TRUE));
+        }    
     }
 
     public function cerrar_caja($id)
     {
-
         $this->Caja_model->cerrar_caja($id,array('IdEstadoCaja' => '5'));
         echo json_encode(array("status" => TRUE));
-
     }
 }

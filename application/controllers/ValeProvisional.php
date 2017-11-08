@@ -49,7 +49,7 @@ class ValeProvisional extends CI_Controller {
        } 
        else 
        {
-            $insert = $this->ValeProvisional_model->agregar_vale_provisional($this->data);
+            $this->ValeProvisional_model->agregar_vale_provisional($this->data);
             echo json_encode(array("status" => TRUE));
        }  
     }

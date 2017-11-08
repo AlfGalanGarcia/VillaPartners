@@ -22,6 +22,7 @@ class LoginVilla_model extends CI_Model
 			$datosSesion = array(
                    'empleado'  => $datos->Nombres." ".$datos->ApePaterno,
                    'alias'     => $datos->Alias,
+                   'id'     => $datos->IdEmpleado,
                    'logged_in' => TRUE
                );
 

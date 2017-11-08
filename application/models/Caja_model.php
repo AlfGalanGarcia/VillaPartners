@@ -18,6 +18,12 @@ class Caja_model extends CI_Model
         return $query->result();
     }
 
+    public function abrir_caja($where, $data)
+        {           
+            $this->db->update($this->tablaCaja, $data, $where);
+            return $this->db->affected_rows();
+        }   
+
     public function cerrar_caja($id, $data)
     {
         $this->db->where('IdCaja', $id);
