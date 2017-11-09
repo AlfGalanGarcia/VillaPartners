@@ -13,20 +13,47 @@ class AbrirCaja extends CI_Controller
         $this->load->library('form_validation');
         $this->datosVista['local']=$this->ModeloPrincipal_model->get_local('1');       
         $this->datosVista['caja']=$this->Caja_model->get_caja();    
-        $this->datosVista['mensaje'] = '';    
+        $this->datosVista['mensaje'] = ''; 
+        $this->datosVista['mensajeError'] = '';    
 
         $this->form_validation->set_error_delimiters('', '');
         $this->form_validation->set_rules('montoSoles', 'Monto en soles', 'required|decimal');
-        $this->form_validation->set_rules('montoDolares', 'Monto en dólares', 'required|decimal');
+        $this->form_validation->set_rules('montoDolares', 'Monto en dólares', 'required|is_natural');
     }
 
     public function index()
     {
-        $this->load->helper('url');
- 
-        $this->load->view('header_view');                      
-        $this->load->view('nav_view',$this->datosVista);                      
-        $this->load->view('abrirCaja_view');                              
+       if (($this->datosVista['caja'][0]->IdEstadoCaja) == 5) 
+        {
+            $this->load->helper('url');
+            $this->load->view('header_view');                      
+            $this->load->view('nav_view',$this->datosVista);
+            $this->load->view('abrirCaja_view',$this->datosVista);                      
+        }                      
+        else
+        {
+            if (($this->datosVista['caja'][0]->IdEmpleadoCaja) == $this->session->userdata('id')) 
+            {
+                if (($this->datosVista['caja'][0]->IdEstadoCaja) == 4) {
+                    $this->load->helper('url');
+                    $this->load->view('header_view');                      
+                    $this->load->view('nav_view',$this->datosVista);                              
+                    $this->load->view('cuadrarCaja_view',$this->datosVista);
+                }
+                else
+                {
+                    $this->load->view('abrirCaja_view');                              
+                }
+                
+            }
+            else
+            {
+                $this->datosVista['mensajeError']  = "<center>El usuario ".$this->datosVista['caja'][0]->Alias." está abriendo la caja en este momento. No se puede realizar la operación</center>";
+                $this->load->view('header_view');                      
+                $this->load->view('nav_view',$this->datosVista);   
+                $this->load->view('abrirCaja_view', $this->datosVista); 
+            }
+        }
     }
 
     public function cuadrar_caja()

@@ -9,35 +9,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         var url;
     
         url = "<?php echo site_url('index.php/AbrirCaja/abrir_caja')?>";
-            
-        $.ajax({
-            url : url,
-            type: "POST",
-            data: $('#formulario_abrirCaja').serialize(),
-            dataType: "JSON",
-            success: function(data)
-            {    
-                if(data.status)
-                {                          
-                    window.location.href = '<?php echo site_url('index.php/AbrirCaja/cuadrar_caja')?>';
-                }
-                else
+        if(confirm('¿Estás seguro? Se va a cerrar la caja'))
+        {            
+            $.ajax({
+                url : url,
+                type: "POST",
+                data: $('#formulario_abrirCaja').serialize(),
+                dataType: "JSON",
+                success: function(data)
+                {    
+                    if(data.status)
+                    {                          
+                        window.location.href = '<?php echo site_url('index.php/AbrirCaja/index')?>';
+                    }
+                    else
+                    {
+                        alert(data);
+                    }
+                    $('#btnSave').text('Aceptar');
+                    $('#btnSave').attr('disabled',false);
+                },
+                error: function (jqXHR, textStatus, errorThrown)
                 {
-                    alert(data);
+                    alert('Error');
+                    $('#btnSave').text('Aceptar');
+                    $('#btnSave').attr('disabled',false);
                 }
-                $('#btnSave').text('Aceptar');
-                $('#btnSave').attr('disabled',false);
-            },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
-                alert('Error');
-                $('#btnSave').text('Aceptar');
-                $('#btnSave').attr('disabled',false);
-            }
-        });
+            });
+        }
     }
 </script>
-
+<?php echo $mensajeError;
+if ($mensajeError == '')
+{
+?>
 <div class="container">
     <div class="row">
         <div class="col-md-offset-5 col-md-3">
@@ -57,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </tr>
                         <tr>
                         <td><label><i class="fa fa-usd fa-2x" aria-hidden="true"></i></label></td>
-                        <td><input name="montoDolares" id="montoDolares" class="form-control" type="text" placeholder="Monto anterior Soles"></td>
+                        <td><input name="montoDolares" id="montoDolares" class="form-control" type="text" placeholder="Monto anterior Dólares"></td>
                     </tr>
                     
                     <tr>
@@ -69,3 +74,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     </div>
 </div>
+<?php
+}
+?>

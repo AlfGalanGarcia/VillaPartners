@@ -128,25 +128,25 @@
 				  				<table>
 				  					<tr><td colspan="4" align="center"><b>Dólares</b></td></tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(1.00); contadorMenos('b1dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">1.00</td><td width="30px;">x</td><td width="30px;" id="b1dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(1.00); contadorMenos('b1dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">1.00</td><td width="30px;">x</td><td width="30px;" id="b1dolares">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(2.00); contadorMenos('b2dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">2.00</td><td width="30px;">x</td><td width="30px;" id="b2dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(2.00); contadorMenos('b2dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">2.00</td><td width="30px;">x</td><td width="30px;" id="b2dolares">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(5.00); contadorMenos('b5dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">5.00</td><td width="30px;">x</td><td width="30px;" id="b5dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(5.00); contadorMenos('b5dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">5.00</td><td width="30px;">x</td><td width="30px;" id="b5dolares">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(10); contadorMenos('b10dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">10.00</td><td width="30px;">x</td><td width="30px;" id="b10dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(10); contadorMenos('b10dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">10.00</td><td width="30px;">x</td><td width="30px;" id="b10dolares">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(20); contadorMenos('b20dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">20.00</td><td width="30px;">x</td><td width="30px;" id="b20dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(20); contadorMenos('b20dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">20.00</td><td width="30px;">x</td><td width="30px;" id="b20dolares">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(50); contadorMenos('b50dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">50.00</td><td width="30px;">x</td><td width="30px;" id="b50dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(50); contadorMenos('b50dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">50.00</td><td width="30px;">x</td><td width="30px;" id="b50dolares">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(100); contadorMenos('b100dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">100.00</td><td width="30px;">x</td><td width="30px;" id="b100dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(100); contadorMenos('b100dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">100.00</td><td width="30px;">x</td><td width="30px;" id="b100dolares">0</td>
 				  					</tr>
 				  				</table>
 				  			</td>
@@ -297,49 +297,133 @@
     function contadorMenos(destino) {
    		if (destino == 'm01soles')
     	{
-    		m01soles --;
-    		document.getElementById(destino).innerHTML = m01soles        
+    		if ((m01soles - 0.1) > 0) 
+    		{
+    			m01soles --;
+	    		document.getElementById(destino).innerHTML = m01soles   
+    		}
     	}
     	else if(destino == 'm02soles'){
-    		m02soles --;
-    		document.getElementById(destino).innerHTML = m02soles        
+    		if ((m02soles - 0.2) > 0) 
+    		{    		
+	    		m02soles --;
+	    		document.getElementById(destino).innerHTML = m02soles 
+    		}       
     	}
     	else if(destino == 'm05soles'){
+    		if ((m05soles - 0.5) > 0) 
+    		{    		
     		m05soles --;
-    		document.getElementById(destino).innerHTML = m05soles        
+    		document.getElementById(destino).innerHTML = m05soles 
+    		}       
     	}
     	else if(destino == 'm1soles'){
+    		if ((m1soles - 1) > 0) 
+    		{    		
     		m1soles --;
-    		document.getElementById(destino).innerHTML = m1soles        
+    		document.getElementById(destino).innerHTML = m1soles
+    		}        
     	}	
     	else if(destino == 'm2soles'){
+    		if ((m2soles - 2) > 0) 
+    		{    		
     		m2soles --;
-    		document.getElementById(destino).innerHTML = m2soles        
+    		document.getElementById(destino).innerHTML = m2soles
+    		}        
     	}	
     	else if(destino == 'm5soles'){
+    		if ((m5soles - 5) > 0) 
+    		{    		
     		m5soles --;
-    		document.getElementById(destino).innerHTML = m5soles        
+    		document.getElementById(destino).innerHTML = m5soles
+    		}        
     	}	    	
     	else if(destino == 'b10soles'){
+    		if ((b10soles - 10) > 0) 
+    		{    		
     		b10soles --;
-    		document.getElementById(destino).innerHTML = b10soles        
+    		document.getElementById(destino).innerHTML = b10soles 
+    		}       
     	}	
     	else if(destino == 'b20soles'){
+    		if ((b20soles - 20) > 0) 
+    		{    		
     		b20soles --;
-    		document.getElementById(destino).innerHTML = b20soles        
+    		document.getElementById(destino).innerHTML = b20soles 
+    		}       
     	}	
     	else if(destino == 'b50soles'){
+    		if ((b50soles - 50) > 0) 
+    		{    	    		
     		b50soles --;
-    		document.getElementById(destino).innerHTML = b50soles        
+    		document.getElementById(destino).innerHTML = b50soles 
+    		}       
     	}	
     	else if(destino == 'b100soles'){
+    		if ((b100soles - 100) > 0) 
+    		{    		
     		b100soles --;
-    		document.getElementById(destino).innerHTML = b100soles        
+    		document.getElementById(destino).innerHTML = b100soles   
+    		}     
     	}	
     	else if(destino == 'b200soles'){
+    		if ((b200soles - 200) > 0) 
+    		{    		
     		b200soles --;
-    		document.getElementById(destino).innerHTML = b200soles        
+    		document.getElementById(destino).innerHTML = b200soles     
+    		}   
     	}	
+
+
+    	else if(destino == 'b1dolares'){
+    		if ((b1dolares - 1) > 0) 
+    		{    		
+	    		b1dolares --;
+	    		document.getElementById(destino).innerHTML = b1dolares 
+    		}       
+    	}	
+    	else if(destino == 'b2dolares'){
+    		if ((b2dolares - 2) > 0) 
+    		{    		
+	    		b2dolares --;
+	    		document.getElementById(destino).innerHTML = b2dolares 
+    		}       
+    	}	
+    	else if(destino == 'b5dolares'){
+    		if ((b5dolares - 5) > 0) 
+    		{    		
+	    		b5dolares --;
+	    		document.getElementById(destino).innerHTML = b5dolares
+    		}        
+    	}	    	
+    	else if(destino == 'b10dolares'){
+    		if ((b10dolares - 10) > 0) 
+    		{    		
+	    		b10dolares --;
+	    		document.getElementById(destino).innerHTML = b10dolares
+    		}        
+    	}	
+    	else if(destino == 'b20dolares'){
+    		if ((b20dolares - 20) > 0) 
+    		{    		
+	    		b20dolares --;
+	    		document.getElementById(destino).innerHTML = b20dolares  
+    		}      
+    	}	
+    	else if(destino == 'b50dolares'){
+    		if ((b50dolares - 50) > 0) 
+    		{    		
+	    		b50dolares --;
+	    		document.getElementById(destino).innerHTML = b50dolares
+    		}        
+    	}	
+    	else if(destino == 'b100dolares'){
+    		if ((b100dolares - 100) > 0) 
+    		{    		
+	    		b100dolares --;
+	    		document.getElementById(destino).innerHTML = b100dolares    
+    		}    
+    	}
 
     }
 
@@ -376,29 +460,29 @@
     }
 
     function decrementaValorSoles(valor) {
-    	/*if ((i -= valor) < 0) { alert('No es posible conteo menor de 0');}
+    	if ((totalConteoSoles -= valor) < 0) { alert('No es posible conteo menor de 0');}
     	else
-    	{*/
+    	{
 	    	totalConteoSoles -= valor;
 	    	var totalCajaSoles = <?php echo json_encode($totalCajaSoles); ?>;
 	       
 	        document.getElementById("displaySoles").innerHTML = totalConteoSoles.toFixed(2);
 	        document.getElementById("diferenciaSoles").innerHTML = (totalConteoSoles-totalCajaSoles).toFixed(2) ;
 
-    	//}	
+    	}	
  
     }
 
-    function decrementaValorSolesDolares(valor) {
-    	/*if ((i -= valor) < 0) { alert('No es posible conteo menor de 0');}
+    function decrementaValorDolares(valorDolares) {
+    	if ((totalConteoDolares -= valorDolares) < 0) { alert('No es posible conteo menor de 0');}
     	else
-    	{*/
-	    	totalConteoDolares -= valor;
+    	{
+	    	totalConteoDolares -= valorDolares;
 	    	var totalCajaDolares = <?php echo json_encode($totalCajaDolares); ?>;
 	       
 	        document.getElementById("displayDolares").innerHTML = totalConteoDolares.toFixed(2);
-	        document.getElementById("diferenciaSoles").innerHTML = (totalConteoDolares - totalCajaDolares).toFixed(2);       	
-    	//}
+	        document.getElementById("diferenciaDolares").innerHTML = (totalConteoDolares - totalCajaDolares).toFixed(2);       	
+    	}
    
     }
     </script>

@@ -12,8 +12,9 @@ class Caja_model extends CI_Model
 
     public function get_caja()
     {
-        $query = $this->db->query('SELECT caja.*, estado.* from caja
+        $query = $this->db->query('SELECT caja.*, estado.*, empleado.* from caja
             INNER JOIN estado ON caja.IdEstadoCaja = estado.IdEstado
+            INNER JOIN empleado ON empleado.IdEmpleado = caja.IdEmpleadoCaja
             ');
         return $query->result();
     }

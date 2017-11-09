@@ -27,7 +27,14 @@ class CajaChica extends CI_Controller
         $this->data['IdTipoDoc'] = $this->input->post('input_IdTipoDoc');
         $this->data['IdMoneda'] = $this->input->post('input_IdMoneda');
         $this->data['IdIgv'] = $this->input->post('input_IdIgv');
-        $this->data['Monto'] = $this->input->post('input_Monto')*1.18;  
+        if ($this->input->post('input_IdMoneda') == 1) {
+            $this->data['Monto'] = $this->input->post('input_Monto')*1.18;  
+        }
+        else
+        {
+            $this->data['Monto'] = ($this->input->post('input_Monto')*($this->ModeloPrincipal_model->get_tipoCambio()[0]->valorTC))*1.18; //TC 3.24    
+        }
+        
 
         $this->datosVista['detalleCajaChica']=$this->CajaChica_model->get_all_cajaChica(); 
         $this->datosVista['sumaMontosCC']=$this->CajaChica_model->get_all_montosCC(); 

@@ -41,6 +41,12 @@ class ModeloPrincipal_model extends CI_Model
         return $query->result();
     } 
 
+    public function get_tipoCambio()
+    {
+        $query = $this->db->query('SELECT IdTipoCambio, valorTC, fechaTC from tipocambio');
+        return $query->result();
+    } 
+
     public function get_IGV()
     {
         $query = $this->db->query('SELECT IdIgv, valor from igv');

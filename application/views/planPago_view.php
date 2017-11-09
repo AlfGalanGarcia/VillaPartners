@@ -54,7 +54,7 @@
             //'colvis',
             {
                 extend: 'collection',
-                text: 'Agregar Plan de pago',
+                text: 'Registrar plan de pago',
                 action: function agregar_planPago()
                     {
                         save_method = 'agregar_planPago';
