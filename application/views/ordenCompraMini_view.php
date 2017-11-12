@@ -13,7 +13,10 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($ordenCompra as $items){?>
+            <?php 
+            $IGV = 0.18;
+            foreach($ordenCompra as $items){?>
+
             <tr>                        
                 <td><?php echo $items->NroOC;?></td>
                 <td name="proveedor"><?php echo $items->NombreProveedor;?></td>

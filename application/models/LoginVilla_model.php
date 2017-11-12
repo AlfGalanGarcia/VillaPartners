@@ -27,6 +27,7 @@ class LoginVilla_model extends CI_Model
                    'empleado'  	=> $datos->Nombres." ".$datos->ApePaterno,
                    'alias'     	=> $datos->Alias,
                    'id'     	=> $datos->IdEmpleado,
+                   'rol'     	=> $datos->Rol,
                    'logged_in' 	=> TRUE
                );
 				$this->session->set_userdata($datosSesion);

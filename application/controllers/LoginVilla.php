@@ -21,8 +21,15 @@ class LoginVilla extends CI_Controller {
     
 	public function index()
 	{
-		
-		$this->load->view('loginVilla_view',$this->datosVista);
+		if ($this->session->userdata('logged_in') == TRUE) {
+			$this->load->view('header_view');                      
+        	$this->load->view('nav_view',$this->datosVista);  
+			$this->load->view('portada_view');
+		}
+		else
+		{
+			$this->load->view('loginVilla_view',$this->datosVista);
+		}
 	}
 	
 	public function acceder()
@@ -35,13 +42,19 @@ class LoginVilla extends CI_Controller {
 		{
 			$this->load->view('header_view');                      
         	$this->load->view('nav_view',$this->datosVista);                      
-        	$this->load->view('PlanPago_view',$this->datosVista);
+    		$this->load->view('portada_view');
 		}
 		else
 		{
 			$this->datosVista['mensaje']  = "Usuario o clave incorrectos";
 			$this->load->view('loginVilla_view',$this->datosVista);
 		}
+	}
+
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		$this->load->view('loginVilla_view',$this->datosVista);
 	}
 
 }

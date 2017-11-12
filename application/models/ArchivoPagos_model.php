@@ -25,7 +25,6 @@ class ArchivoPagos_model extends CI_Model {
         } else {
             return $query->result_array();
         }
-        
     }
 
     public function generar_archivoPagos($data)

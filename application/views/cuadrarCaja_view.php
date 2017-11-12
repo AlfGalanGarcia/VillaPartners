@@ -460,7 +460,7 @@
     }
 
     function decrementaValorSoles(valor) {
-    	if ((totalConteoSoles -= valor) < 0) { alert('No es posible conteo menor de 0');}
+    	if ((totalConteoSoles - valor) < 0) { alert('No es posible conteo menor de 0');}
     	else
     	{
 	    	totalConteoSoles -= valor;
@@ -474,7 +474,7 @@
     }
 
     function decrementaValorDolares(valorDolares) {
-    	if ((totalConteoDolares -= valorDolares) < 0) { alert('No es posible conteo menor de 0');}
+    	if ((totalConteoDolares - valorDolares) < 0) { alert('No es posible conteo menor de 0');}
     	else
     	{
 	    	totalConteoDolares -= valorDolares;

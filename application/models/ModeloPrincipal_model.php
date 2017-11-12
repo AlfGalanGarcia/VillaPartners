@@ -21,7 +21,13 @@ class ModeloPrincipal_model extends CI_Model
     {
         $query = $this->db->query('SELECT Nombre from local');
         return $query->result();
-    }    
+    }   
+
+    public function get_banco()
+    {
+        $query = $this->db->query('SELECT IdBanco, NombreBanco, NroCtaCteVC from banco');
+        return $query->result();
+    }     
 
     public function get_tipoDoc()
     {

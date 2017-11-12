@@ -211,7 +211,7 @@
                 <td><?php echo $items->NombreProveedor;?></td>
                 <td><?php echo date('d-m-Y', strtotime($items->FechaEmision));?></td>    
                 <td><?php echo $items->DescripcionCC;?></td>
-                <td><?php echo $items->Monto." ".$items->AbreviaturaMoneda?></td>                                                                  
+                <td><?php echo "S/ ".$items->Monto?></td>                                                                  
                       </tr> 
                      <?php }?>
             </tbody>
