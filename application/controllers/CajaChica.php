@@ -16,7 +16,7 @@ class CajaChica extends CI_Controller
         $this->form_validation->set_rules('input_IdDetalleCC', 'Número de documento', 'required|is_natural');
         $this->form_validation->set_rules('input_FechaEmision', 'Fecha de emisión', 'required');
         $this->form_validation->set_rules('input_DescripcionCC', 'Descripción', 'required');
-        $this->form_validation->set_rules('input_Monto', 'Monto', 'required|decimal');
+        $this->form_validation->set_rules('input_Monto', 'Monto', 'required|decimal|greater_than[0]');
         $this->datosVista['observados']=$this->ModeloPrincipal_model->get_observados();
 
         //Campos formulario

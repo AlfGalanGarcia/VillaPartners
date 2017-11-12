@@ -88,52 +88,6 @@
         });
         }
 
- /*function save()
-    {
-        $('#btnSave').text('Guardando...');
-        $('#btnSave').attr('disabled',true); 
-
-        var url;
-     
-        if(save_method == 'generar_archivoPagos') {
-            url = "<?php echo site_url('index.php/ArchivoPagos/generar_archivoPagos')?>";
-        } else {
-            url = "<?php echo site_url('index.php/OrdenCompra/ajax_update')?>";
-        }
-     
-
-        $.ajax({
-            url : url,
-            type: "POST",
-            data: $('#formulario_archivoPagos').serialize(),
-            dataType: "JSON",
-            success: function(data)
-            {
-     
-                if(data.status) 
-                {
-                    $('#modal_archivoPagos').modal('hide');               
-                    location.reload();
-                }
-                else
-                {
-                    alert(data);
-                }
-                $('#btnSave').text('Aceptar'); 
-                $('#btnSave').attr('disabled',false);
-     
-     
-            },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
-                alert('Existe un archivo en estado vigente');
-                $('#btnSave').text('Grabar');
-                $('#btnSave').attr('disabled',false);
-     
-            }
-        });
-    }*/
-
     function rechazar_pago_modal(id)
     {
         $('#modal_rechazar_pago').modal('show');
@@ -158,8 +112,31 @@
                 alert('Error');
             }
         });
-
         }
+    }
+        
+
+    function eliminar_archivoPagos(id)
+    {
+      if(confirm('¿Estás seguro? Se va a eliminar el archivo de pago'))
+      {
+
+          $.ajax({
+            url : "<?php echo site_url('index.php/ArchivoPagos/eliminar_archivoPagos')?>/"+id,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data)
+            {
+               
+               location.reload();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Error modificando la OC');
+            }
+        });
+
+      }
     }
 </script>
 
@@ -207,6 +184,7 @@
                                 ?>
                                 <button id="mostrarArchivoPagosMini" class="btn btn-primary btn-xs" onclick="mostrar_archivoPagosMini(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Ver OCs"><i class="fa fa-search"></i></button>
                                 <button id="generar_pago" class="btn btn-info btn-xs" onclick="ver_tabla()" title="Ver tabla para exportar"><i class="fa fa-file-excel-o" aria-hidden="true"></i></button>
+                                <button class="btn btn-danger btn-xs" onclick="eliminar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>
                                 <?php
                                 }    
                                 ?>                  

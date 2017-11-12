@@ -148,7 +148,7 @@
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {
-                    alert('Error en los datos.');
+                    alert('Documento ya registrado.');
                     $('#btnSave').text('Grabar');
                     $('#btnSave').attr('disabled',false);
          
@@ -211,7 +211,7 @@
                 <td><?php echo $items->NombreProveedor;?></td>
                 <td><?php echo date('d-m-Y', strtotime($items->FechaEmision));?></td>    
                 <td><?php echo $items->DescripcionCC;?></td>
-                <td><?php echo "S/ ".$items->Monto?></td>                                                                  
+                <td><?php echo "S/ ".sprintf('%0.2f',$items->Monto)?></td>                                                                  
                       </tr> 
                      <?php }?>
             </tbody>
@@ -245,7 +245,7 @@
                 </select>
                 
                 <label class="control-label">Fecha de emisión</label>
-                <input name="input_FechaEmision" data-date-format="dd-mm-yyyy" class="form-control datepicker" type="text">
+                <input name="input_FechaEmision" data-date-format="dd-mm-yyyy" class="form-control datepicker" type="text" value="<?php echo date('d-m-Y');?>">
 
                 <label class="control-label">Descripción</label>
                 <input name="input_DescripcionCC" class="form-control" type="text">
