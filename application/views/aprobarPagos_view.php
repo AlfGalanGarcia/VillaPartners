@@ -14,7 +14,7 @@
         } ); 
     } );
 
-    var save_method; 
+    //var save_method; 
 
     function generar_pago()
         {            
@@ -22,9 +22,8 @@
             $('#modal_generarPago').modal('show');
         }
 
-        function ver_tabla()
-        {            
-            //$('#formulario_archivoPagos')[0].reset();             
+    function ver_tabla()
+        {                        
             $('#modal_tablaBanco').modal('show');
         }
     
@@ -89,7 +88,7 @@
         });
         }
 
- function save()
+ /*function save()
     {
         $('#btnSave').text('Guardando...');
         $('#btnSave').attr('disabled',true); 
@@ -133,30 +132,34 @@
      
             }
         });
+    }*/
+
+    function rechazar_pago_modal(id)
+    {
+        $('#modal_rechazar_pago').modal('show');
     }
 
-
-    function eliminar_archivoPagos(id)
+    function rechazar_pago()
     {
-      if(confirm('¿Estás seguro? Se va a eliminar el archivo de pago'))
-      {
-
-          $.ajax({
-            url : "<?php echo site_url('index.php/ArchivoPagos/eliminar_archivoPagos')?>/"+id,
+        if(confirm('¿Estás seguro? Se va a rechazar la aprobación del pago'))
+        {
+            
+            $.ajax({
+            url : "<?php echo site_url('index.php/AprobarPagos/rechazar_pago')?>",
             type: "POST",
+            data: $('#formulario_rechazar_pago').serialize(),
             dataType: "JSON",
             success: function(data)
-            {
-               
+            {               
                location.reload();
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('Error modificando la OC');
+                alert('Error');
             }
         });
 
-      }
+        }
     }
 </script>
 
@@ -189,15 +192,14 @@
                                 ?>
                                 <button id="mostrarArchivoPagosMini" class="btn btn-primary btn-xs" onclick="mostrar_archivoPagosMini(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Ver"><i class="fa fa-search"></i></button>
                                 <button id="aprobarPago" class="btn btn-success btn-xs" onclick="aprobar_pago(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Aprobar"><i class="fa fa-check-square-o"></i></button> 
-                                <button class="btn btn-warning btn-xs" onclick="rechazar_pago(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Rechazar"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                <button class="btn btn-warning btn-xs" onclick="rechazar_pago_modal()" title="Rechazar"><i class="fa fa-times" aria-hidden="true"></i></button>
                                 <?php
                             }
                             elseif ($archivoPagos[0]->IdEstado == 6 || $archivoPagos[0]->IdEstado == 7) 
                                {
                                 ?>
                             <button id="mostrarArchivoPagosMini" class="btn btn-primary btn-xs" onclick="mostrar_archivoPagosMini(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Ver OCs"><i class="fa fa-search"></i></button>
-                            <button id="generar_pago" class="btn btn-success btn-xs" onclick="generar_pago()" title="Generar pago"><i class="fa fa-usd" aria-hidden="true"></i></button>
-                            <button id="generar_pago" class="btn btn-info btn-xs" onclick="ver_tabla()" title="Ver tabla para exportar"><i class="fa fa-file-excel-o" aria-hidden="true"></i></button>
+                            <button id="generar_pago" class="btn btn-success btn-xs" onclick="generar_pago()" title="Generar pago"><i class="fa fa-usd" aria-hidden="true"></i></button>                            
                                         <?php
                                 }
                             elseif ($archivoPagos[0]->IdEstado == 8) 
@@ -280,6 +282,50 @@
           </div>
           <div class="modal-footer">
             <button type="button" id="btnSave" onclick="generar_tabla_banco()" class="btn btn-primary">Generar tabla</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+          </div>
+        </div>
+        </div>
+      </div>
+ </div>
+
+ <div class="modal fade" id="modal_rechazar_pago" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>        
+            <div class="col-md-6 pull-left">
+                <h4 class="modal-title">Rechazar pago</h4>                
+            </div>
+        </div>      
+      <div class="modal-body form">
+        <form action="#" id="formulario_rechazar_pago" class="form-horizontal">
+          <input type="hidden" value="1" name="input_IdArchivoPagos"/>
+          <div class="form-body row">
+            <div class="col-md-6 form-group" style="margin-left: 20px;">
+                <table>
+                    <tr>
+                        <td nowrap="">
+                            <label class="control-label">Fecha de rechazo</label>
+                        </td>
+                        <td>
+                            <input name="input_FechaRechazo" class="datepicker" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="control-label">Motivo rechazo</label>
+                        </td>
+                        <td>
+                            <textarea name="input_MotivoRechazo" class="form-control"></textarea>                            
+                        </td>
+                    </tr>
+               </table>     
+            </div>                       
+        </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="btnSave" onclick="rechazar_pago()" class="btn btn-primary">Rechazar pago</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
           </div>
         </div>

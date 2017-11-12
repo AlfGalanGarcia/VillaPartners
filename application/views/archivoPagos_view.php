@@ -34,23 +34,6 @@
 "<'row'<'col-sm-5'i><'col-sm-7'p>>",
           buttons: 
           [
-            {
-                extend: 'collection',
-                text: 'Exportar',
-                buttons: 
-                [
-                    {extend: 'excelHtml5',
-                        exportOptions: {
-                            columns: ':visible:not(:eq(0))' 
-                                }
-                            }, 
-                    {extend: 'csvHtml5',
-                        exportOptions: {
-                            columns: ':visible:not(:eq(0))' 
-                        }
-                    }
-                ]
-            }, 
             //'colvis',
             {
                 extend: 'collection',
@@ -175,7 +158,7 @@
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('Existe un archivo en estado vigente');
+                alert('Existe un archivo pendiente');
                 $('#btnSave').text('Grabar');
                 $('#btnSave').attr('disabled',false);
      
@@ -235,42 +218,45 @@
                 </tr>
             </thead>
             <tbody>
-                    <?php if ($archivoPagos == TRUE) {
-                        ?>
+                    <?php 
+                    if ($archivoPagos == TRUE) {
+                    ?>
 
                      <tr>                        
               <td style="vertical-align: middle;">
-                <?php
+                    <?php
                     if ($archivoPagos[0]->IdEstado == 3) 
                     {
-                        ?>
-                        <button id="editarArchivoPagos" class="btn btn-info btn-xs" onclick="editar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Modificar" disabled><i class="glyphicon glyphicon-pencil"></i></button>
+                    ?>
                         <button id="mostrarArchivoPagosMini" class="btn btn-primary btn-xs" onclick="mostrar_archivoPagosMini(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Mostrar OC"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-danger btn-xs" onclick="eliminar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>
                         <?php
                     }
-                    else
-                       {
+                    elseif ($archivoPagos[0]->IdEstado == 1 || $archivoPagos[0]->IdEstado == 7) 
+                    {
+                    ?>
+                        <button id="editarArchivoPagos" class="btn btn-info btn-xs" onclick="editar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Modificar"><i class="glyphicon glyphicon-pencil"></i>
+                        </button>
+                        <?php
+                        if ($sumaMontoTotalOC[0]->sumaMontos > 0.000)
+                        {                            
                         ?>
-                        <button id="editarArchivoPagos" class="btn btn-info btn-xs" onclick="editar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Modificar"><i class="glyphicon glyphicon-pencil"></i></button>
-                            <?php
-                            if ($sumaMontoTotalOC[0]->sumaMontos == 0.000) {
-                                ?>
-                                <button id="editarArchivoPagos" class="btn btn-success btn-xs" onclick="preaprobar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Preaprobar" disabled><i class="fa fa-check-square-o"></i></button>    
-                                <?php
-                            }
-                            else
-                            {
-                                ?>
-                                <button id="editarArchivoPagos" class="btn btn-success btn-xs" onclick="preaprobar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Preaprobar"><i class="fa fa-check-square-o"></i></button>    
-                                <?php
-                            }
-                            ?>
-
-                      <?php
+                        <button id="editarArchivoPagos" class="btn btn-success btn-xs" onclick="preaprobar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Preaprobar"><i class="fa fa-check-square-o"></i></button>    
+                        <?php
+                        }
+                        ?>
+                        <button class="btn btn-danger btn-xs" onclick="eliminar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>
+                    <?php
                     }
-                ?>
+                    elseif ($archivoPagos[0]->IdEstado == 6 || $archivoPagos[0]->IdEstado == 8) 
+                    {
+                    ?>
+                        <button id="mostrarArchivoPagosMini" class="btn btn-primary btn-xs" onclick="mostrar_archivoPagosMini(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Mostrar OC"><i class="fa fa-search"></i></button>
+                    <?php
+                    }
+                    ?>
                   
-                  <button class="btn btn-danger btn-xs" onclick="eliminar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>
+
               </td>
                 <td><?php echo $archivoPagos[0]->IdArchivoPagos;?></td>
                 <td><?php echo date('d-m-Y', strtotime($archivoPagos[0]->FechaCreacion));?></td>

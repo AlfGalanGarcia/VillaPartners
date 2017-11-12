@@ -17,6 +17,7 @@ class CajaChica extends CI_Controller
         $this->form_validation->set_rules('input_FechaEmision', 'Fecha de emisión', 'required');
         $this->form_validation->set_rules('input_DescripcionCC', 'Descripción', 'required');
         $this->form_validation->set_rules('input_Monto', 'Monto', 'required|decimal');
+        $this->datosVista['observados']=$this->ModeloPrincipal_model->get_observados();
 
         //Campos formulario
         $this->data['IdDetalleCC'] = $this->input->post('input_IdDetalleCC');        
@@ -43,7 +44,7 @@ class CajaChica extends CI_Controller
         $this->datosVista['proveedor']=$this->ModeloPrincipal_model->get_proveedor();   
         $this->datosVista['moneda']=$this->ModeloPrincipal_model->get_moneda(); 
         $this->datosVista['igv']=$this->ModeloPrincipal_model->get_IGV(); 
-        $this->datosVista['local']=$this->ModeloPrincipal_model->get_local('1');        
+        $this->datosVista['local']=$this->ModeloPrincipal_model->get_local('1');    
         
     }
 

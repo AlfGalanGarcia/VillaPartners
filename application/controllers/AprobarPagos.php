@@ -2,7 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class AprobarPagos extends CI_Controller 
 {
-	public $data = array();    
+	public $data = array(); 
+	public $dataRechazo = array();    
     public $datosVista = array();
 
     public function __construct()
@@ -12,6 +13,11 @@ class AprobarPagos extends CI_Controller
 		$this->load->model('AprobarPagos_model');
         $this->load->model('ModeloPrincipal_model');
         $this->load->model('OrdenCompraTemporal_model');
+
+        $this->dataRechazo['FechaRechazo'] 	= date('Y-m-d', strtotime($this->input->post('input_FechaRechazo')));
+    	$this->dataRechazo['MotivoRechazo'] = $this->input->post('input_MotivoRechazo');
+    	$this->dataRechazo['IdEstado'] 		= '9';
+
         
 		$this->datosVista['archivoBanco']=$this->AprobarPagos_model->get_all_archivoBanco(); 
 		$this->datosVista['datosAprobar']=$this->AprobarPagos_model->get_datos_aprobar('1'); 
@@ -20,6 +26,8 @@ class AprobarPagos extends CI_Controller
         $this->datosVista['sumaMontoTotalOC']=$this->OrdenCompraTemporal_model->get_all_montosOC(); 
         $this->datosVista['local']=$this->ModeloPrincipal_model->get_local(); 	
         $this->datosVista['banco']=$this->ModeloPrincipal_model->get_banco();
+        $this->datosVista['observados']=$this->ModeloPrincipal_model->get_observados();
+
         
     }
 
@@ -38,11 +46,11 @@ class AprobarPagos extends CI_Controller
         echo json_encode(array("status" => TRUE));
     }
 
-    public function generar_archivoPagos()
+    /*public function generar_archivoPagos()
     {
         $this->ArchivoPagos_model->generar_archivoPagos($this->data);
         echo json_encode(array("status" => TRUE));        
-    }
+    }*/
 
     public function generar_tabla_banco()
     {
@@ -59,5 +67,19 @@ class AprobarPagos extends CI_Controller
             echo json_encode(array("status" => TRUE));
         //}
 
+    }
+
+    public function rechazar_pago()
+    {
+    	/*$dataRechazo = array(
+    		'IdEstado'		=> '9',
+			'FechaRechazo'  => date('Y-m-d', strtotime($this->input->post('input_FechaRechazo'))),
+			'MotivoRechazo' => $this->input->post('input_MotivoRechazo')
+		);*/
+
+	
+        //$this->AprobarPagos_model->aprobar_pago($id,$this->dataRechazo);
+        $this->AprobarPagos_model->rechazar_pago(array('IdArchivoPagos' => '1'), $this->dataRechazo);
+        echo json_encode(array("status" => TRUE));
     }
 }

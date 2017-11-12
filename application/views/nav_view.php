@@ -22,8 +22,32 @@
                     </ul>
                   </div>
                 </li>
+
       </ul>
           <ul class="nav navbar-nav navbar-right">
+            <?php
+            if ($this->session->userdata('rol') == 'CAJERO' && $this->session->userdata('MotivoRechazo') != NULL) {
+            ?>
+            <li class="dropdown tasks-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Observados">
+              <i class="fa fa-flag-o"></i>
+              <span class="badge badge-danger" style="background:red; position:relative; top: -15px; left: -30px;"><?php echo $this->session->userdata('NroRechazos');?></span>
+            </a>            
+            <ul class="dropdown-menu" style="width: 200px;">              
+              <li>                
+                <font color="orange"><i class="fa fa-warning text-yellow"></font><font color="black">Archivo <?php echo $this->session->userdata('IdArchivoPagos');?>: rechazado</i>
+              </li> 
+              <li>
+                <i class="fa fa-calendar">&nbsp;Fecha: <?php echo date('d/m', strtotime($this->session->userdata('FechaRechazo')));?></i>
+              </li> 
+              <li>
+                <i class="fa fa-question-circle">&nbsp;Motivo: <?php echo $this->session->userdata('MotivoRechazo');?></font></i>                  
+              </li>              
+            </ul>
+          </li>
+          <?php
+           }
+           ?>
       <li><i class="fa fa-user-circle"></i>&nbsp;<?php echo $this->session->userdata('empleado')." - ".$this->session->userdata('rol')?>&nbsp; <button class="btn btn-danger btn-xs" onclick="window.location='<?php echo site_url('loginVilla/logout/');?>'" title="Logout"><i class="fa fa-sign-out" aria-hidden="true"></i></button>&nbsp;</li>      
     </ul>
   </div>

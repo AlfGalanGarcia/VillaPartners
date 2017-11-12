@@ -72,4 +72,10 @@ class AprobarPagos_model extends CI_Model {
         }
     	$this->db->insert_batch($this->tablaArchivoBanco, $data);
     }
+
+    public function rechazar_pago($where,$data)
+    {
+        $this->db->update($this->tablaArchivoPagos, $data, $where);
+        return $this->db->affected_rows();
+    }
 }

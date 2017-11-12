@@ -28,7 +28,8 @@ class ValeProvisional extends CI_Controller {
          //datos
         $this->datosVista['valeProvisional']=$this->ValeProvisional_model->get_all_vale_provisional();
         $this->datosVista['empleado']=$this->ModeloPrincipal_model->get_empleado();   
-        $this->datosVista['local']=$this->ModeloPrincipal_model->get_local();           
+        $this->datosVista['local']=$this->ModeloPrincipal_model->get_local();   
+        $this->datosVista['observados']=$this->ModeloPrincipal_model->get_observados();      
 
     }
  

@@ -22,7 +22,9 @@ class ArchivoPagos extends CI_Controller
         $this->datosVista['archivoPagos']=$this->ArchivoPagos_model->get_all_archivoPagos(); 
         $this->datosVista['ordenCompra']=$this->OrdenCompraTemporal_model->get_all_ordenCompra(); 
         $this->datosVista['sumaMontoTotalOC']=$this->OrdenCompraTemporal_model->get_all_montosOC(); 
-        $this->datosVista['local']=$this->ModeloPrincipal_model->get_local(); 	
+        $this->datosVista['local']=$this->ModeloPrincipal_model->get_local();
+        $this->datosVista['observados']=$this->ModeloPrincipal_model->get_observados(); 	
+
     }
 
     public function index()
@@ -42,7 +44,7 @@ class ArchivoPagos extends CI_Controller
     public function preaprobar_archivoPagos($id)
     {
 
-        $this->ArchivoPagos_model->preaprobar_archivoPagos($id,array('IdEstado' => '3'));
+        $this->ArchivoPagos_model->preaprobar_archivoPagos($id,array('IdEstado' => '3', 'FechaRechazo' => NULL, 'MotivoRechazo' => NULL));
         echo json_encode(array("status" => TRUE));
 
     }

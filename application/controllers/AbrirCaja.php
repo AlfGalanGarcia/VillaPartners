@@ -11,7 +11,8 @@ class AbrirCaja extends CI_Controller
     	$this->load->helper('form');
     	$this->load->model('Caja_model');
         $this->load->library('form_validation');
-        $this->datosVista['local']=$this->ModeloPrincipal_model->get_local('1');       
+        $this->datosVista['local']=$this->ModeloPrincipal_model->get_local('1');
+        $this->datosVista['observados']=$this->ModeloPrincipal_model->get_observados();       
         $this->datosVista['caja']=$this->Caja_model->get_caja();    
         $this->datosVista['mensaje'] = ''; 
         $this->datosVista['mensajeError'] = '';    

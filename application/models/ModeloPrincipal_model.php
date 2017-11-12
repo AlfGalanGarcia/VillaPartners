@@ -69,4 +69,21 @@ class ModeloPrincipal_model extends CI_Model
         $this->session->set_userdata($datosSesion);
         return $query->result();
     } 
+
+    public function get_observados()
+    {
+        $query = $this->db->query('SELECT IdArchivoPagos, FechaRechazo, MotivoRechazo from archivoPagos');
+        $filas = $query->num_rows();        
+        if($filas > 0){
+            $datos = $query->result()[0];
+            $datosSesion = array(
+                   'IdArchivoPagos' => $datos->IdArchivoPagos,
+                   'FechaRechazo'   => $datos->FechaRechazo,
+                   'MotivoRechazo'  => $datos->MotivoRechazo,
+                   'NroRechazos'    => $filas
+               );       
+            $this->session->set_userdata($datosSesion);
+            return $query->result();
+        }        
+    } 
 }
