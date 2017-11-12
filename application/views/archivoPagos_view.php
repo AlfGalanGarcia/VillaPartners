@@ -232,7 +232,7 @@
                         <button class="btn btn-danger btn-xs" onclick="eliminar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>
                         <?php
                     }
-                    elseif ($archivoPagos[0]->IdEstado == 1 || $archivoPagos[0]->IdEstado == 7) 
+                    elseif ($archivoPagos[0]->IdEstado == 1 || $archivoPagos[0]->IdEstado == 7 || $archivoPagos[0]->IdEstado == 9) 
                     {
                     ?>
                         <button id="editarArchivoPagos" class="btn btn-info btn-xs" onclick="editar_archivoPagos(<?php echo $archivoPagos[0]->IdArchivoPagos;?>)" title="Modificar"><i class="glyphicon glyphicon-pencil"></i>
