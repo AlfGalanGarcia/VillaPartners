@@ -19,6 +19,8 @@
                       ?>
                       <li><button class="btn btn-default" onclick="window.location='<?php echo site_url('CajaChica/index/');?>'" style="width: 100%; text-align: left;"><i class="fa fa-usd" aria-hidden="true">&nbsp;&nbsp;Documentos de caja chica</i></button></li>
                       <li><button class="btn btn-default" onclick="window.location='<?php echo site_url('AbrirCaja/index/');?>'" style="width: 100%; text-align: left;"><i class="fa fa-university" aria-hidden="true">&nbsp;&nbsp;Abrir caja</i></button></li>
+                      <li><button class="btn btn-default" onclick="window.location='<?php echo site_url('CobrarCuenta/index/');?>'" style="width: 100%; text-align: left;"><i class="fa fa-credit-card" aria-hidden="true">&nbsp;&nbsp;Cobrar Cuenta</i></button></li>
+
                     </ul>
                   </div>
                 </li>
