@@ -318,56 +318,56 @@
     		}       
     	}
     	else if(destino == 'm1soles'){
-    		if ((m1soles - 1) > 0) 
+    		if ((m1soles - 1) >= 0) 
     		{    		
     		m1soles --;
     		document.getElementById(destino).innerHTML = m1soles
     		}        
     	}	
     	else if(destino == 'm2soles'){
-    		if ((m2soles - 2) > 0) 
+    		if ((m2soles - 1) >= 0) 
     		{    		
     		m2soles --;
     		document.getElementById(destino).innerHTML = m2soles
     		}        
     	}	
     	else if(destino == 'm5soles'){
-    		if ((m5soles - 5) > 0) 
+    		if ((m5soles - 1) >= 0) 
     		{    		
     		m5soles --;
     		document.getElementById(destino).innerHTML = m5soles
     		}        
     	}	    	
     	else if(destino == 'b10soles'){
-    		if ((b10soles - 10) > 0) 
+    		if ((b10soles - 1) >= 0) 
     		{    		
     		b10soles --;
     		document.getElementById(destino).innerHTML = b10soles 
     		}       
     	}	
     	else if(destino == 'b20soles'){
-    		if ((b20soles - 20) > 0) 
+    		if ((b20soles - 1) >= 0) 
     		{    		
     		b20soles --;
     		document.getElementById(destino).innerHTML = b20soles 
     		}       
     	}	
     	else if(destino == 'b50soles'){
-    		if ((b50soles - 50) > 0) 
+    		if ((b50soles - 1) >= 0) 
     		{    	    		
     		b50soles --;
     		document.getElementById(destino).innerHTML = b50soles 
     		}       
     	}	
     	else if(destino == 'b100soles'){
-    		if ((b100soles - 100) > 0) 
+    		if ((b100soles - 1) >= 0) 
     		{    		
     		b100soles --;
     		document.getElementById(destino).innerHTML = b100soles   
     		}     
     	}	
     	else if(destino == 'b200soles'){
-    		if ((b200soles - 200) > 0) 
+    		if ((b200soles - 1) >= 0) 
     		{    		
     		b200soles --;
     		document.getElementById(destino).innerHTML = b200soles     
@@ -376,49 +376,49 @@
 
 
     	else if(destino == 'b1dolares'){
-    		if ((b1dolares - 1) > 0) 
+    		if ((b1dolares - 1) >= 0) 
     		{    		
 	    		b1dolares --;
 	    		document.getElementById(destino).innerHTML = b1dolares 
     		}       
     	}	
     	else if(destino == 'b2dolares'){
-    		if ((b2dolares - 2) > 0) 
+    		if ((b2dolares - 1) >= 0) 
     		{    		
 	    		b2dolares --;
 	    		document.getElementById(destino).innerHTML = b2dolares 
     		}       
     	}	
     	else if(destino == 'b5dolares'){
-    		if ((b5dolares - 5) > 0) 
+    		if ((b5dolares - 1) >= 0) 
     		{    		
 	    		b5dolares --;
 	    		document.getElementById(destino).innerHTML = b5dolares
     		}        
     	}	    	
     	else if(destino == 'b10dolares'){
-    		if ((b10dolares - 10) > 0) 
+    		if ((b10dolares - 1) >= 0) 
     		{    		
 	    		b10dolares --;
 	    		document.getElementById(destino).innerHTML = b10dolares
     		}        
     	}	
     	else if(destino == 'b20dolares'){
-    		if ((b20dolares - 20) > 0) 
+    		if ((b20dolares - 1) >= 0) 
     		{    		
 	    		b20dolares --;
 	    		document.getElementById(destino).innerHTML = b20dolares  
     		}      
     	}	
     	else if(destino == 'b50dolares'){
-    		if ((b50dolares - 50) > 0) 
+    		if ((b50dolares - 1) >= 0) 
     		{    		
 	    		b50dolares --;
 	    		document.getElementById(destino).innerHTML = b50dolares
     		}        
     	}	
     	else if(destino == 'b100dolares'){
-    		if ((b100dolares - 100) > 0) 
+    		if ((b100dolares - 1) >= 0) 
     		{    		
 	    		b100dolares --;
 	    		document.getElementById(destino).innerHTML = b100dolares    
