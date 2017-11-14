@@ -19,8 +19,7 @@ class CobrarCuenta_model extends CI_Model {
             (SELECT empleado.Alias FROM empleado where empleado.IdEmpleado = pedidomesa.IdEmpleadoSesion) as aliasSesion 
             FROM pedidomesa
             INNER JOIN estado ON estado.IdEstado = pedidomesa.IdEstadoPedido 
-            INNER JOIN empleado ON empleado.IdEmpleado = pedidomesa.IdEmpleado 
-            ');
+            INNER JOIN empleado ON empleado.IdEmpleado = pedidomesa.IdEmpleado');
             return $query->result();
     }
 

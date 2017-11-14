@@ -5,6 +5,7 @@
 
         var table = $('#tabla_pedido').DataTable( 
         { 
+          "order": [[ 5, "desc" ]],  
           //scrollY: "350px",
           scrollX: true,
           bAutoWidth:false,
@@ -102,7 +103,7 @@
                 <td><?php echo $items->IdPedido;?></td>                
                 <td><?php echo $items->IdMesa;?></td>
                 <td><?php echo $items->MontoPedido;?></td>                
-                <td><?php echo $items->nombres?></td>                                                      
+                <td><?php echo $items->nombres;?></td>                                                      
                 <td><?php echo "<span style='background-color:".$items->colorEtiqueta.";' class='label label-warning'>".$items->Descripcion."</span>";?></td>                                    
                                 
                       </tr>
