@@ -90,7 +90,7 @@
 	if (!empty($detallePedido)) {
 			
 		$tc = $tc[0]->valorTC;
-		if ($detallePedido[0]->IdEmpleadoSesion == $this->session->userdata('id'))
+		if ($detallePedido[0]->IdEmpleadoSesion == $this->session->userdata('id') || $detallePedido[0]->IdEstadoPedido != 10)
 		{
 		?>
 			
