@@ -3,7 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  
 class CobrarCuenta_model extends CI_Model {
  
-    var $tablaPedidoMesa = 'pedidomesa';    
+    var $tablaPedidoMesa = 'pedidomesa'; 
+    var $tablaVenta = 'venta';   
  
     public function __construct()
     {
@@ -20,7 +21,7 @@ class CobrarCuenta_model extends CI_Model {
             FROM pedidomesa
             INNER JOIN estado ON estado.IdEstado = pedidomesa.IdEstadoPedido 
             INNER JOIN empleado ON empleado.IdEmpleado = pedidomesa.IdEmpleado 
-            ORDER BY IdPedido ASC');
+            ORDER BY pedidomesa.IdEstadoPedido ASC');
             return $query->result();
     }
 
@@ -42,19 +43,27 @@ class CobrarCuenta_model extends CI_Model {
         //$this->db->from($this->tablaPedidoMesa);
         //$this->db->where('IdPedido', $id);
         $query=$this->db->query("
-            SELECT pedidomesa.*, detallepedido.*, producto.*,
+            SELECT pedidomesa.*, detallepedido.*, producto.*, estado.*, CONCAT(empleado.Nombres,' ',empleado.ApePaterno) as nombres,
             (SELECT empleado.Alias FROM empleado where empleado.IdEmpleado = pedidomesa.IdEmpleadoSesion) as aliasSesion 
             from pedidomesa
+            INNER JOIN empleado ON empleado.IdEmpleado = pedidomesa.IdEmpleado
+            INNER JOIN estado ON estado.IdEstado = pedidomesa.IdEstadoPedido
 			INNER JOIN detallepedido ON detallepedido.IdPedido = pedidomesa.IdPedido
 			INNER JOIN producto ON producto.IdProducto = detallepedido.IdProducto WHERE pedidomesa.IdPedido = '$id'");
             return $query->result();
     	
     }
 
-    public function precuenta($id, $data)
+    public function cambiar_estado($id, $data)
     {
         $this->db->where('IdPedido', $id);
         $this->db->update($this->tablaPedidoMesa, $data);
         return $this->db->affected_rows();
+    }
+
+    public function pagar($data)
+    {
+    	$this->db->insert($this->tablaVenta, $data);
+        return $this->db->insert_id();
     }
 }    

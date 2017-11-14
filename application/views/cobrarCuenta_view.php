@@ -19,24 +19,31 @@
     } );
 
 
-    function precuenta(id)
+    function mostrar_detalle_pedido(id)
     {       
-        if (confirm('¿Está seguro? Se va a realizar la precuenta del pedido')) 
-        {
-            $.ajax({
-            url : "<?php echo site_url('index.php/CobrarCuenta/precuenta')?>/"+id,
+        window.location.href = "<?php echo site_url('CobrarCuenta/venta')?>/"+id;       
+    }
+
+    function anular(id)
+    {
+      if(confirm('¿Estás seguro? Se va a anular el pedido'))
+      {
+
+          $.ajax({
+            url : "<?php echo site_url('index.php/CobrarCuenta/anular')?>/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)
-            {
-                window.location.href = "<?php echo site_url('CobrarCuenta/venta')?>/"+id;
+            {             
+               location.reload();
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                alert('Error');
+                alert('Error modificando la OC');
             }
-            });
-        }           
+        });
+
+      }
     }
 
 </script>
@@ -63,8 +70,8 @@
                     if ($items->IdEstadoPedido == 2)
                     {
                     ?>
-                        <button class="btn btn-success btn-xs" onclick="precuenta(<?php echo $items->IdPedido;?>)" title="Precuenta"><i class="fa fa-usd" aria-hidden="true"></i></button>
-                        <button class="btn btn-danger btn-xs" onclick="eliminar_planPago(<?php echo $items->IdPedido;?>)" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>
+                        <button class="btn btn-primary btn-xs" onclick="mostrar_detalle_pedido(<?php echo $items->IdPedido;?>)" title="Mostrar detalle de pedido"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        <button class="btn btn-danger btn-xs" onclick="anular(<?php echo $items->IdPedido;?>)" title="Anular"><i class="glyphicon glyphicon-trash"></i></button>
                     <?php
                     }
                     elseif ($items->IdEstadoPedido == 10)
@@ -72,15 +79,24 @@
                         if ($items->IdEmpleadoSesion == $this->session->userdata('id'))  
                         {                                        
                         ?>
-                        <button class="btn btn-success btn-xs" onclick="precuenta(<?php echo $items->IdPedido;?>)" title="Precuenta"><i class="fa fa-usd" aria-hidden="true"></i></button>
-                        <button class="btn btn-danger btn-xs" onclick="eliminar_planPago(<?php echo $items->IdPedido;?>)" title="Eliminar"><i class="glyphicon glyphicon-trash"></i></button>
+                            <button class="btn btn-primary btn-xs" onclick="mostrar_detalle_pedido(<?php echo $items->IdPedido;?>)" title="Mostrar detalle de pedido"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            <button class="btn btn-danger btn-xs" onclick="anular(<?php echo $items->IdPedido;?>)" title="Anular"><i class="glyphicon glyphicon-trash"></i></button>
                         <?php
                         }
                         else
                         {
-                            echo "<font color='red'><b>Atendido por el usuario: ".$items->aliasSesion."</font></b>"; 
+                        ?>
+                            <button class="btn btn-primary btn-xs" onclick="mostrar_detalle_pedido(<?php echo $items->IdPedido;?>)" title="Mostrar detalle de pedido"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        <?php
                         }
                     }
+                    elseif ($items->IdEstadoPedido == 12 || $items->IdEstadoPedido == 11)
+                    {
+                    ?>
+                            <button class="btn btn-primary btn-xs" onclick="mostrar_detalle_pedido(<?php echo $items->IdPedido;?>)" title="Mostrar detalle de pedido"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        <?php
+                    }
+                      
                     ?>
                 </td>
                 <td><?php echo $items->IdPedido;?></td>                
