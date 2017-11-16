@@ -4,12 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script type="text/javascript">
     function save()
     {
-        $('#btnSave').text('Guardando...'); 
-        $('#btnSave').attr('disabled',true); 
         var url;
     
         url = "<?php echo site_url('index.php/AbrirCaja/abrir_caja')?>";
-        if(confirm('¿Estás seguro? Se va a cerrar la caja'))
+        if(confirm('¿Estás seguro? Se va a abrir la caja'))
         {            
             $.ajax({
                 url : url,
@@ -32,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 error: function (jqXHR, textStatus, errorThrown)
                 {
                     alert('Error');
-                    $('#btnSave').text('Aceptar');
+                    $('#btnSave').text('Aceptar'); 
                     $('#btnSave').attr('disabled',false);
                 }
             });

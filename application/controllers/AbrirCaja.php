@@ -19,7 +19,7 @@ class AbrirCaja extends CI_Controller
 
         $this->form_validation->set_error_delimiters('', '');
         $this->form_validation->set_rules('montoSoles', 'Monto en soles', 'required|decimal');
-        $this->form_validation->set_rules('montoDolares', 'Monto en dólares', 'required|is_natural');
+        $this->form_validation->set_rules('montoDolares', 'Monto en dólares', 'is_natural');
     }
 
     public function index()
@@ -70,6 +70,9 @@ class AbrirCaja extends CI_Controller
 		$this->data['IdEstadoCaja'] = '4';
         $this->data['montoSoles'] = $this->input->post('montoSoles');
         $this->data['montoDolares'] = $this->input->post('montoDolares');
+        if ($this->input->post('montoDolares') == '') {
+            $this->data['montoSoles'] == 0;
+        }
         $this->data['IdEmpleadoCaja'] = $this->input->post('userId');
 
         if ($this->form_validation->run() == FALSE) 

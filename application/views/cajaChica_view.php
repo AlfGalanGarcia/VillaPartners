@@ -211,7 +211,7 @@
                 <td><?php echo $items->NombreProveedor;?></td>
                 <td><?php echo date('d-m-Y', strtotime($items->FechaEmision));?></td>    
                 <td><?php echo $items->DescripcionCC;?></td>
-                <td><?php echo "S/ ".sprintf('%0.2f',$items->Monto)?></td>                                                                  
+                <td><?php echo $items->AbreviaturaMoneda." ".sprintf('%0.2f',$items->Monto/$tc[0]->valorTC)?></td>                                                                  
                       </tr> 
                      <?php }?>
             </tbody>

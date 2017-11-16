@@ -189,8 +189,27 @@
 	</div>
 </div>
     <script type="text/javascript">
-    var totalCierreCajaSoles = 1;
-    var totalCierreCajaDolares = 1;
+    var totalCajaSoles = <?php echo json_encode($totalCajaSoles); ?>;  
+    var totalCajaDolares = <?php echo json_encode($totalCajaDolares); ?>;  
+    
+    if (totalCajaSoles == 0) 
+    {
+        var totalCierreCajaSoles = 0;    
+    }
+    else
+    {
+        var totalCierreCajaSoles = 1;
+    }
+
+    if (totalCajaDolares == 0) 
+    {
+        var totalCierreCajaDolares = 0;    
+    }
+    else
+    {
+        var totalCierreCajaDolares = 1;
+    }
+    
     	
     var totalConteoSoles = 0;
     var m01soles = 0;
@@ -464,7 +483,7 @@
     	else
     	{
 	    	totalConteoSoles -= valor;
-	    	var totalCajaSoles = <?php echo json_encode($totalCajaSoles); ?>;
+	    	
 	       
 	        document.getElementById("displaySoles").innerHTML = totalConteoSoles.toFixed(2);
 	        document.getElementById("diferenciaSoles").innerHTML = (totalConteoSoles-totalCajaSoles).toFixed(2) ;
@@ -478,7 +497,7 @@
     	else
     	{
 	    	totalConteoDolares -= valorDolares;
-	    	var totalCajaDolares = <?php echo json_encode($totalCajaDolares); ?>;
+	    	
 	       
 	        document.getElementById("displayDolares").innerHTML = totalConteoDolares.toFixed(2);
 	        document.getElementById("diferenciaDolares").innerHTML = (totalConteoDolares - totalCajaDolares).toFixed(2);       	

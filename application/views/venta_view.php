@@ -99,7 +99,7 @@
 		<div class="container">
 		  <div class="row">
 		  	<?php
-		  	if ($detallePedido[0]->IdEstadoPedido == 11)
+		  	if ($detallePedido[0]->IdEstadoPedido == 11 || $detallePedido[0]->IdEstadoPedido == 12)
 		  	{
 		  		echo "<div class='col-sm-12' id='bordeDiv'>";	
 		  	}
@@ -184,7 +184,7 @@
 		    </div>
 
 		    <?php
-		    	if ($detallePedido[0]->IdEstadoPedido != 11)
+		    	if ($detallePedido[0]->IdEstadoPedido < 11)
 		    	{		    	
 		    ?>
 		    <div class="col-sm-4" id="bordeDiv">
@@ -362,7 +362,7 @@
     var tarjeta = Number($('#tarjeta').val());
     var moneda = Number($('#tipoMoneda').val());
     var tc = <?php echo(json_encode($tc));?>;   
-    var totalPedido = <?php echo(json_encode($detallePedido[0]->MontoPedido));?>; 
+    var totalPedido = <?php echo(json_encode($importe));?>; 
     var cero = 0;  
 
     if (efectivo < 0 || tarjeta < 0) 

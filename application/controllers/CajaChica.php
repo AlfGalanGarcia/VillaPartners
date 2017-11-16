@@ -29,11 +29,11 @@ class CajaChica extends CI_Controller
         $this->data['IdMoneda'] = $this->input->post('input_IdMoneda');
         $this->data['IdIgv'] = $this->input->post('input_IdIgv');
         if ($this->input->post('input_IdMoneda') == 1) {
-            $this->data['Monto'] = $this->input->post('input_Monto')*1.18;  
+            $this->data['Monto'] = $this->input->post('input_Monto');  
         }
         else
         {
-            $this->data['Monto'] = ($this->input->post('input_Monto')*($this->ModeloPrincipal_model->get_tipoCambio()[0]->valorTC))*1.18; //TC 3.24    
+            $this->data['Monto'] = ($this->input->post('input_Monto')*($this->ModeloPrincipal_model->get_tipoCambio()[0]->valorTC)); //TC 3.24    
         }
         
 
@@ -44,7 +44,8 @@ class CajaChica extends CI_Controller
         $this->datosVista['proveedor']=$this->ModeloPrincipal_model->get_proveedor();   
         $this->datosVista['moneda']=$this->ModeloPrincipal_model->get_moneda(); 
         $this->datosVista['igv']=$this->ModeloPrincipal_model->get_IGV(); 
-        $this->datosVista['local']=$this->ModeloPrincipal_model->get_local('1');    
+        $this->datosVista['local']=$this->ModeloPrincipal_model->get_local('1');
+        $this->datosVista['tc']=$this->ModeloPrincipal_model->get_tipoCambio();
         
     }
 
