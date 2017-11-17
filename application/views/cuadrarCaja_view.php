@@ -9,7 +9,7 @@
 	#bordeDiv {
     border-radius: 10px;
     border: 2px solid #000000;  
-    margin-left: 20px;
+    margin-left: 20px;    
 	}
 </style>
 
@@ -51,7 +51,7 @@
 
 <body>
 <div class="container">	
-	<div class="row">
+	<div class="row" >
 	  	<div class="col-sm-5" id="bordeDiv">
 	  		<CENTER><B>SOLES</B></CENTER>
 	  		<button onclick="incrementaValorSoles(0.10); contadorMas('m01soles')"><img src="<?php echo base_url() ?>img/dinero/moneda01soles.png"></button>
@@ -74,13 +74,16 @@
 	  		<button onclick="incrementaValorDolares(10); contadorMas('b10dolares')"><img src="<?php echo base_url() ?>img/dinero/billete10dolares.png"></button>
 	  		<button onclick="incrementaValorDolares(20); contadorMas('b20dolares')"><img src="<?php echo base_url() ?>img/dinero/billete20dolares.png"></button>
 	  		<button onclick="incrementaValorDolares(50); contadorMas('b50dolares')"><img src="<?php echo base_url() ?>img/dinero/billete50dolares.png"></button>
-	  		<button onclick="incrementaValorDolares(100); contadorMas('b100dolares')"><img src="<?php echo base_url() ?>img/dinero/billete100dolares.png"></button>
+	  		<button onclick="incrementaValorDolares(100); contadorMas('b100dolares')"><img src="<?php echo base_url() ?>img/dinero/billete100dolares.png" ></button>
 
 
 	  	</div>
 	  	<div class="col-sm-6">
-	  		<h4><b>Estado de caja: <?php echo "<span style='background-color:".$caja[0]->colorEtiqueta.";' class='label label-warning'>".$caja[0]->Descripcion."</span>";?></b></h4>
-	  			<br>
+            <div class="col-sm-10 pull-right">
+                <h4><b>Estado de caja: <?php echo "<span style='background-color:".$caja[0]->colorEtiqueta.";' class='label label-warning'>".$caja[0]->Descripcion."</span>";?></b></h4>
+            </div>
+	  		
+	  			
 	  			<div class="col-sm-9" id="bordeDiv">
 	  				<b>Conteo </b><button onclick="reiniciar_conteo()" title="Reiniciar conteo"><i class="fa fa-refresh" aria-hidden="true"></i></button><br><br>
 	  				<table width="100%">
@@ -89,38 +92,38 @@
 				  				<table>
 				  					<tr><td colspan="4" align="center"><b>Soles</b></td></tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(0.10); contadorMenos('m01soles')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">0.1</td><td width="30px;">x</td><td width="30px;" id="m01soles">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorSoles(0.10); contadorMenos('m01soles')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">0.1</td><td width="30px;">x</td><td width="30px;" id="m01soles">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(0.20); contadorMenos('m02soles')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">0.2</td>
+				  						<td width="30px;"><button onclick="decrementaValorSoles(0.20); contadorMenos('m02soles')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">0.2</td>
 				  						<td width="30px;">x</td><td width="30px;" id="m02soles">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(0.50); contadorMenos('m05soles')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">0.5</td><td width="30px;">x</td><td width="30px;" id="m05soles">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorSoles(0.50); contadorMenos('m05soles')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">0.5</td><td width="30px;">x</td><td width="30px;" id="m05soles">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(1.00); contadorMenos('m1soles')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">1.00</td><td width="30px;">x</td><td width="30px;" id="m1soles">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorSoles(1.00); contadorMenos('m1soles')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">1.00</td><td width="30px;">x</td><td width="30px;" id="m1soles">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(2.00); contadorMenos('m2soles')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">2.00</td><td width="30px;">x</td><td width="30px;" id="m2soles">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorSoles(2.00); contadorMenos('m2soles')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">2.00</td><td width="30px;">x</td><td width="30px;" id="m2soles">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(5.00); contadorMenos('m5soles')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">5.00</td><td width="30px;">x</td><td width="30px;" id="m5soles">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorSoles(5.00); contadorMenos('m5soles')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">5.00</td><td width="30px;">x</td><td width="30px;" id="m5soles">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(10); contadorMenos('b10soles')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">10.00</td><td width="30px;">x</td><td width="30px;" id="b10soles">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorSoles(10); contadorMenos('b10soles')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">10.00</td><td width="30px;">x</td><td width="30px;" id="b10soles">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(20); contadorMenos('b20soles')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">20.00</td><td width="30px;">x</td><td width="30px;" id="b20soles">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorSoles(20); contadorMenos('b20soles')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">20.00</td><td width="30px;">x</td><td width="30px;" id="b20soles">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(50); contadorMenos('b50soles')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">50.00</td><td width="30px;">x</td><td width="30px;" id="b50soles">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorSoles(50); contadorMenos('b50soles')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">50.00</td><td width="30px;">x</td><td width="30px;" id="b50soles">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(100); contadorMenos('b100soles')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">100.00</td><td width="30px;">x</td><td width="30px;" id="b100soles">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorSoles(100); contadorMenos('b100soles')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">100.00</td><td width="30px;">x</td><td width="30px;" id="b100soles">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorSoles(200); contadorMenos('b200soles')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">200.00</td><td width="30px;">x</td><td width="30px;" id="b200soles">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorSoles(200); contadorMenos('b200soles')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">200.00</td><td width="30px;">x</td><td width="30px;" id="b200soles">0</td>
 				  					</tr>
 				  				</table>
 				  			</td>
@@ -128,25 +131,25 @@
 				  				<table>
 				  					<tr><td colspan="4" align="center"><b>Dólares</b></td></tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorDolares(1.00); contadorMenos('b1dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">1.00</td><td width="30px;">x</td><td width="30px;" id="b1dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(1.00); contadorMenos('b1dolares')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">1.00</td><td width="30px;">x</td><td width="30px;" id="b1dolares">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorDolares(2.00); contadorMenos('b2dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">2.00</td><td width="30px;">x</td><td width="30px;" id="b2dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(2.00); contadorMenos('b2dolares')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">2.00</td><td width="30px;">x</td><td width="30px;" id="b2dolares">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorDolares(5.00); contadorMenos('b5dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">5.00</td><td width="30px;">x</td><td width="30px;" id="b5dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(5.00); contadorMenos('b5dolares')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">5.00</td><td width="30px;">x</td><td width="30px;" id="b5dolares">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorDolares(10); contadorMenos('b10dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">10.00</td><td width="30px;">x</td><td width="30px;" id="b10dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(10); contadorMenos('b10dolares')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">10.00</td><td width="30px;">x</td><td width="30px;" id="b10dolares">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorDolares(20); contadorMenos('b20dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">20.00</td><td width="30px;">x</td><td width="30px;" id="b20dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(20); contadorMenos('b20dolares')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">20.00</td><td width="30px;">x</td><td width="30px;" id="b20dolares">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorDolares(50); contadorMenos('b50dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">50.00</td><td width="30px;">x</td><td width="30px;" id="b50dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(50); contadorMenos('b50dolares')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">50.00</td><td width="30px;">x</td><td width="30px;" id="b50dolares">0</td>
 				  					</tr>
 				  					<tr>
-				  						<td width="30px;"><button onclick="decrementaValorDolares(100); contadorMenos('b100dolares')"/><i class="fa fa-minus-circle" aria-hidden="true"></i></button><td width="50px;">100.00</td><td width="30px;">x</td><td width="30px;" id="b100dolares">0</td>
+				  						<td width="30px;"><button onclick="decrementaValorDolares(100); contadorMenos('b100dolares')"/><i class="fa fa-minus-circle fa-2x" aria-hidden="true"></i></button><td width="50px;">100.00</td><td width="30px;">x</td><td width="30px;" id="b100dolares">0</td>
 				  					</tr>
 				  				</table>
 				  			</td>
