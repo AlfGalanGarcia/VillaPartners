@@ -56,7 +56,7 @@ if ($mensajeError == '')
                     </tr>
                     <tr>
                         <td><label><img src="<?php echo base_url() ?>img/iconoSol.png" width="50%" height="50%"></i></label></td>
-                        <td><input name="montoSoles" id="montoSoles" class="form-control" type="text" placeholder="Monto anterior Soles"></td>
+                        <td><input name="montoSoles" id="montoSoles" class="form-control" type="number" step="any" placeholder="Monto anterior Soles"></td>
                     </tr>
                         <tr>
                         <td><label><i class="fa fa-usd fa-2x" aria-hidden="true"></i></label></td>

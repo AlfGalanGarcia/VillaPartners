@@ -18,7 +18,7 @@ class AbrirCaja extends CI_Controller
         $this->datosVista['mensajeError'] = '';    
 
         $this->form_validation->set_error_delimiters('', '');
-        $this->form_validation->set_rules('montoSoles', 'Monto en soles', 'required|decimal');
+        $this->form_validation->set_rules('montoSoles', 'Monto en soles', 'required|is_natural');
         $this->form_validation->set_rules('montoDolares', 'Monto en dólares', 'is_natural');
     }
 

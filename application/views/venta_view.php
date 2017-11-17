@@ -23,7 +23,7 @@
 </style>
 
 <script type="text/javascript">
-	
+
 	function precuenta(id)
     {
     	var estado = <?php echo(json_encode($detallePedido[0]->IdEstadoPedido));?>;
@@ -197,7 +197,7 @@
 						<td>
 		            		<label class="control-label">Comprobante</label>
 	        			</td>
-	        			<td>
+	        			<td colspan="2">
 	        				<select name="input_IdTipoDoc" class="form-control">	        					
 		                    <?php 
 		                    $comprobante = array_slice($tipoDoc,0,2);
@@ -212,7 +212,7 @@
 						<td>
 							<label class="control-label">Moneda</label>
 						</td>
-						<td>
+						<td colspan="2">
 	        				<select name="input_IdMoneda" class="form-control" id='moneda'>
 		                    <?php 	                    
 		                    foreach ($moneda as $item) {
@@ -224,31 +224,37 @@
 					</tr>
 					<tr>
 						<td>
+							<input name="checkboxEfectivo" style="zoom: 2.9;"  type="checkbox" id="checkboxEfectivo">
+						</td>
+						<td>
 							<label class="control-label">Efectivo</label>
 						</td>
 						<td>
-							<input name="input_MontoEfectivo" class="form-control" type="text" id="efectivo">
+							<input name="input_MontoEfectivo" class="form-control" type="text" id="MontoEfectivoText" disabled>
 						</td>
 					</tr>
 					<tr>
 						<td>
+							<input name="checkboxTarjeta" style="zoom: 2.9;" type="checkbox" id="checkboxTarjeta">
+						</td>
+						<td>
 							<label class="control-label">Tarjeta</label>
 						</td>
 						<td>
-							<input name="input_MontoTarjeta" class="form-control" type="text" id="tarjeta">
+							<input name="input_MontoTarjeta" class="form-control" type="text" id="MontoTarjetaText"  disabled>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<label class="control-label">Vuelto S/</label>
 						</td>
-						<td>
+						<td colspan="2">
 							<input type="text" id="vuelto" class="form-control" readonly></span>
 							<input type="hidden" id="tipoMoneda" class="form-control"></span>
 						</td>
 					</tr>
 					<tr style="text-align: center;">
-						<td colspan="2">
+						<td colspan="3">
 						<button class="btn btn-primary btn-md" onclick="pagar()" title="Pagar" id="botonPagar" disabled="true">PAGAR</button>						
                     	</td>
                     </tr>
@@ -351,6 +357,9 @@
 
 
 <script type="text/javascript">
+
+
+
 	$("#moneda").change(function()
 	{
 	    $("#tipoMoneda").val($(this).val());
@@ -358,8 +367,8 @@
 	})
 
 	$('input').keyup(function(){ 
-    var efectivo  = Number($('#efectivo').val());
-    var tarjeta = Number($('#tarjeta').val());
+    var efectivo  = Number($('#MontoEfectivoText').val());
+    var tarjeta = Number($('#MontoTarjetaText').val());
     var moneda = Number($('#tipoMoneda').val());
     var tc = <?php echo(json_encode($tc));?>;   
     var totalPedido = <?php echo(json_encode($importe));?>; 
@@ -379,33 +388,57 @@
 	    {
 	    	if ((efectivo - totalPedido) >= 0)
 	    	{
-	    		document.getElementById('vuelto').value = efectivo - totalPedido;		
+	    		document.getElementById("botonPagar").disabled = false;	
+	    		document.getElementById('vuelto').value = (efectivo - totalPedido).toFixed(2);		    			 	    
 	    	}
 	    	
 	    }
 	    else if (efectivo == '' && tarjeta > 0)
-	    {
-	    	document.getElementById('vuelto') = cero;		
+	    {	    
+	    	if (tarjeta > totalPedido) 
+	    	{
+	    		alert('El monto ingresado supera el monto a cobrar.');	    		
+	    	}
+	    	else
+	    	{	    		    		
+	    		document.getElementById('vuelto') = cero;		
+	    	}
+	    	
 	    }
 	    else
 	    {
-	    	if (((efectivo + tarjeta) - totalPedido) >= 0)
+
+	    	if (((efectivo + tarjeta) - totalPedido) > 0)
 	    	{
-	    		document.getElementById('vuelto').value = (efectivo + tarjeta) - totalPedido;		
+	    		document.getElementById('vuelto').value = ((efectivo + tarjeta) - totalPedido).toFixed(2);		
+	    		document.getElementById("botonPagar").disabled = false;
 	    	}
 	    }
     }
-    
-	   	if((efectivo+tarjeta) > totalPedido)
-	    {
-	    	document.getElementById("botonPagar").disabled = false;
-	    }
-		else
-		{
-		    document.getElementById("botonPagar").disabled = true;
-		}
+
 	});
 
+
+var totalPedido = <?php echo(json_encode($importe));?>; 
+document.getElementById('checkboxEfectivo').onchange = function() {
+    document.getElementById('MontoEfectivoText').disabled = !this.checked;
+};
+
+document.getElementById('checkboxTarjeta').onchange = function() {
+
+	if (document.getElementById('MontoTarjetaText').value != '')
+	{
+		document.getElementById('MontoTarjetaText').value = '';
+		document.getElementById("botonPagar").disabled = true;	
+	}
+	else
+	{
+		document.getElementById('MontoTarjetaText').disabled = !this.checked;    
+	    document.getElementById('MontoTarjetaText').value = totalPedido;	
+	    document.getElementById("botonPagar").disabled = false;		
+	}
+    
+};
 
 
 </script>

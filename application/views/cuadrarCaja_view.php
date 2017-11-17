@@ -162,8 +162,8 @@
 	</div>
 	<div class="row">
 		<?php 
-		$totalCajaSoles = $caja[0]->montoSoles;
-		$totalCajaDolares = $caja[0]->montoDolares;
+		$totalCajaSoles = sprintf('%0.2f', $caja[0]->montoSoles);
+		$totalCajaDolares = sprintf('%0.2f', $caja[0]->montoDolares);
 		?>
     	<div class="col-sm-7">
 			<table>
