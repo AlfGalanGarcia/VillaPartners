@@ -32,21 +32,25 @@
 			$('#moda_precuenta').modal('show');
     	}
     	else
-    	{       
-	        $.ajax({
-	        url : "<?php echo site_url('index.php/CobrarCuenta/precuenta')?>/"+id,
-	        type: "POST",
-	        dataType: "JSON",
-	        success: function(data)
-	        {
-	        	$('#moda_precuenta').modal('show');
-	            //location.reload();
-	        },
-	        error: function (jqXHR, textStatus, errorThrown)
-	        {
-	            alert('Error');
-	        }
-	        });
+    	{  
+    		if (confirm('Se va a generar la precuenta ¿está seguro?')) 
+    		{
+    			 $.ajax({
+		        url : "<?php echo site_url('index.php/CobrarCuenta/precuenta')?>/"+id,
+		        type: "POST",
+		        dataType: "JSON",
+		        success: function(data)
+		        {
+		        	$('#moda_precuenta').modal('show');
+		            //location.reload();
+		        },
+		        error: function (jqXHR, textStatus, errorThrown)
+		        {
+		            alert('Error');
+		        }
+		        });
+    		}     
+	       
     	}     	
 
     }
