@@ -183,7 +183,7 @@
 </script>
 <body>
     <?php $montoCCSession = $this->session->userdata('MontoCC');?>
-    <?php $montoCCTotal = sprintf('%0.3f', ($montoCCSession)-($sumaMontosCC[0]->sumaMontosCC)) ;?>
+    <?php $montoCCTotal = sprintf('%0.2f', ($montoCCSession)-($sumaMontosCC[0]->sumaMontosCC)) ;?>
     <h3 style="border-bottom: 1px solid rgb(200, 200, 200)"></i>Saldo caja chica: <b><?php echo
     $montoCCTotal;?></b></h3>
     <section>        

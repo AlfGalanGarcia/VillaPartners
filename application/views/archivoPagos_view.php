@@ -260,7 +260,7 @@
               </td>
                 <td><?php echo $archivoPagos[0]->IdArchivoPagos;?></td>
                 <td><?php echo date('d-m-Y', strtotime($archivoPagos[0]->FechaCreacion));?></td>
-                <td><?php echo sprintf('%0.3f', $sumaMontoTotalOC[0]->sumaMontos);?></td>
+                <td><?php echo sprintf('%0.2f', $sumaMontoTotalOC[0]->sumaMontos);?></td>
                 <td><?php echo $archivoPagos[0]->AbreviaturaMoneda;?></td>
                 <td><?php echo "<span style='background-color:".$archivoPagos[0]->colorEtiqueta.";' class='label label-warning'>".$archivoPagos[0]->Descripcion."</span>";?></td>
 
