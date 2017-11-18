@@ -211,7 +211,16 @@
                 <td><?php echo $items->NombreProveedor;?></td>
                 <td><?php echo date('d-m-Y', strtotime($items->FechaEmision));?></td>    
                 <td><?php echo $items->DescripcionCC;?></td>
-                <td><?php echo $items->AbreviaturaMoneda." ".sprintf('%0.2f',$items->Monto/$tc[0]->valorTC)?></td>                                                                  
+                <td><?php echo $items->AbreviaturaMoneda." ";
+                    if ($items->IdMoneda == 1) {
+                        echo sprintf('%0.2f',$items->Monto);
+                    }
+                    else
+                    {
+                        echo sprintf('%0.2f',$items->Monto/$tc[0]->valorTC);
+                    }
+                    ?>
+                </td>                                                                  
                       </tr> 
                      <?php }?>
             </tbody>
